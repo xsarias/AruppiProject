@@ -34,3 +34,25 @@ The tools that will be used in the construction of this project are:
 
 ## Process
 For understand Aruppi process, were create Activity Diagramas.
+Activity diagrams the differents process that there are in Aruppi.
+
+### Anime Activity Diagram
+![diagrama](Images/AnimeActivityDiagram.png)
+### Manga Activity Diagram
+![diagrama](Images/MangaActivityDiagram.png)
+### News Activity Diagram
+![diagrama](Images/NewaActivityDiagram.png)
+### Preferences Activity Diagram
+
+![diagrama](Images/PreferencesDiagramActivity.png)
+### Radio Activity Diagram
+
+![diagrama](Images/RadioActivityDiagram.png)
+### User History Activity Diagram
+
+![diagrama](Images/UserHistoryActivity.png)
+
+
+
+
+

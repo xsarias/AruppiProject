@@ -4,14 +4,119 @@ Authors:
 -> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
+from fastapi import FastAPI
+from pydantic import BaseModel
 from .anime_subsystem import AnimeFacade, Anime
+
+
+menuAnime=AnimeFacade()
+app = FastAPI(
+    title="Aruppi API",
+    description="This is an Aruppi aplication.",
+    version="1.0.0"
+)
+
+
+#an example 
+class Search(BaseModel):
+    """This is an example class"""
+    name: str
+    category:str
+
+@app.post("/anime/search_by_category")
+async def search_by_category(search_category:Search):
+    """
+    This function search an anime by category.
+
+    Args:
+        s.
+
+    Returns:
+        .
+    """
+    return {"find": search_category}
+
+@app.post("/anime/search_by_type")
+async def search_by_type(search_type:Search):
+    """
+    This function search an anime by type.
+
+    Args:
+        s.
+
+    Returns:
+        .
+    """
+    return {"find": search_type}
+
+@app.post("/anime/search_by_tittle")
+async def search_by_tittle(search_tittle:Search):
+    """
+    This function search an anime by type.
+
+    Args:
+        s.
+
+    Returns:
+        .
+    """
+    return {"find": search_tittle}
+
+@app.get("/anime/watch_series")
+async def watch_series():
+    """
+    This function get series to watch.
+    """
+    return {"message": "serie"}
+
+@app.get("/anime/watch_ovas")
+async def watch_ovas():
+    """
+    This function get ovas to watch.
+    """
+    return {"ovas":"ov"}
+
+@app.get("/anime/watch_movies")
+async def watch_movies():
+    """
+    This function get movies to watch.
+    """
+    return {"user_id": "the current user"}
+
+@app.get("/anime/watch_especials")
+async def watch_especials():
+    """
+    This function get especials to watch.
+    """
+    return {"user_id": "the current user"}
+
+@app.get("/radio/listen_radio")
+async def listen_radio():
+    """
+    This function get radio station to listen.
+    """
+    return {"station":"station x"}
+
+@app.get("/news/read_news")
+async def read_news():
+    """
+    This function get news to read.
+    """
+    return {"news":"noticion"}
+
+@app.get("/users/{user_id}")
+async def read_user(user_id: str):
+    """
+    This function get user information.
+    """
+    return {"user_id": user_id}
 
 MENU="""
 ......   ......   .... .... ......   ......  .......
-|  _  |  |  _  \  |  | |  | |  _  \  |  _  \ |_   _|  
-| |_| |  | |_|  | |  | |  | | |_\  | | |_\  |  | |
+|  _  |  |  _  \\  |  | |  | |  _  \\  |  _  \\ |_   _|  
+| |_| |  | |_|  | |  | |  | | |_\\  | | |_\\  |  | |
 |  _  |  |     /  |  |_|  | |   __/  |   __/  _| |_
-|_| |_|  |__|\_\  |_______| |__|     |__|    |_____|
+|_| |_|  |__|\\_\\  |_______| |__|     |__|    |_____|
         >>>> ALL JAPAN IN A SAME PLACE <<<
 What do you want to explore?
 1). Anime.
@@ -19,7 +124,40 @@ What do you want to explore?
 3). News.
 4). View my user profile.
 """
-menu=AnimeFacade()
+def anime_menu():
+    """This method shows the principal anime menu"""
+    ANIME_MENU="""
+        ......   ...  .... ....... ....   ....  ........
+        |  _  |  |  \\ |  | |_   _| |   \\ /   |  |  __  |
+        | |_| |  |   \\|  |   | |   |         |  |   ___|
+        |  _  |  |       |  _| |_  |   |\/|  |  |  |___
+        |_| |_|  |__|\\___| |_____| |___|  |__|  |______|
+                 >>> A R U P P I <<< 
+        What do you want to do?
+        1). Search Anime.
+        2). Watch Series.
+        3). Watch Movies.
+        4). Watch Ovas's.
+        5). Watch Especials.
+        6). Back to principal menu.
+        """
+
+    print(ANIME_MENU)
+    op=input(print("Please, select an option:"))
+    if op=="1":
+        pass
+    elif op=="2":
+        self.watch_anime("series")
+    elif op=="3":
+        self.watch_anime("movies")
+    elif op=="4":
+        self.watch_anime("ovas")
+    elif op=="5":
+        self.watch_anime("especials")
+    elif op=="6":
+        pass
+         
+
 def main():
     """This if the main file of the project."""
     print(MENU)
@@ -27,7 +165,7 @@ def main():
     if op=="1":
         
         print("no hace nada xd")
-        menu.anime_menu()
+        menuAnime.anime_menu()
     elif op=="2":
         pass
     elif op=="3":
@@ -35,3 +173,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

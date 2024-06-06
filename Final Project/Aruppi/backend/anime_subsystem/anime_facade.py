@@ -6,57 +6,35 @@ Authors:
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
 
-MENU="""
-        ......   ...  .... ....... ....   ....  ........
-        |  _  |  |  \ |  | |_   _| |   \ /   |  |  __  |
-        | |_| |  |   \|  |   | |   |         |  |   ___|
-        |  _  |  |       |  _| |_  |   |\/|  |  |  |___
-        |_| |_|  |__|\___| |_____| |___|  |__|  |______|
-                 >>> A R U P P I <<< 
-        What do you want to do?
-        1). Search Anime.
-        2). Watch Series.
-        3). Watch Movies.
-        4). Watch Ovas's.
-        5). Watch Especials.
-        6). Back to principal menu.
-        """
-        
+from .anime import Anime
+from .anime_types import Series, Ovas, Specials, Movies
 class AnimeFacade:
     """
-    This class represents the Facade of Anime content
+    This class represents the Facade of Anime content.
+    
+    Methods:
+        
     """
     def __init__(self):
         pass
-    
-    def anime_menu(self):
-        """This method shows the principal anime menu"""
-        print(MENU)
-        op=input(print("Please, select an option:"))
-        if op=="1":
-            pass
-        elif op=="2":
-            self.watch_anime("series")
-        elif op=="3":
-            self.watch_anime("movies")
-        elif op=="4":
-            self.watch_anime("ovas")
-        elif op=="5":
-            self.watch_anime("especials")
-        elif op=="6":
-            pass
-    
     def watch_anime(self, anime_type:str):
         """This method asks the user about the type of content he/she want to watch"""
-
+        return None
     def add__to_favorite(self):
         """This method lets users add anime content to their own favorite list """
-    
+        return None
     def add_to_queue(self):
         """This method lets users add anime content to their own queue list """
-    
+        return None
     def add_to_recommended(self):
         """This method lets users add anime content to their own recommended list """
-    
-    def search_anime(self):
-        """This method lets user to find anime content,by diferent categories"""
+        return None
+    def search_anime_by_type(self):
+        """This method lets user to find anime content by type"""
+        return None
+    def search_anime_by_tittle(self):
+        """This method lets user to find anime content by tittle"""
+        return None
+    def search_anime_by_category(self):
+        """This method lets user to find anime content by category"""
+        return None

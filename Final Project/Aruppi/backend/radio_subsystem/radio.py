@@ -10,8 +10,7 @@ class Radio:
 
     def __init__(self, station:str) -> None:
         self.station=station
-        self._state=Play(self)
 
-    def ChangeState(self,state):
+    def ChangeState(self,station):
         """This method define the changes of state"""
-        self.state=state
+

@@ -28,19 +28,17 @@ class Anime(ABC):
         description: str,
         category: str,
         anime_type:str,
-        episodes_amount: int,
         producer: str,
     ):
         self.anime_id=anime_id
         self.description = description
         self.category = category
         self.anime_type = anime_type
-        self.episodes_amount = episodes_amount
         self.producer = producer
 
     def is_category(self, category):
         """this method return if the category anime has the same one."""
         return self.category==category
     
-    def get_user_profile(self)->dict:
-        """This method get the user profile information"""
+
+        

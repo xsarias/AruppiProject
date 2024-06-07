@@ -1,12 +1,14 @@
+# syntax=docker/dockerfile:1.2
+
 FROM python:3.11-slim-buster
 
 WORKDIR /app
 
-COPY backend/ /app/
+COPY backend/ .
 
-COPY requirements.txt /app/
+COPY requirements.txt .
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 EXPOSE 8080
 

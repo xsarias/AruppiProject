@@ -8,6 +8,8 @@ Authors:
 
 from .anime import Anime
 from .anime_types import Series, Ovas, Specials, Movies
+
+
 class AnimeFacade:
     """
     This class represents the Facade of Anime content.
@@ -38,3 +40,5 @@ class AnimeFacade:
     def search_anime_by_category(self):
         """This method lets user to find anime content by category"""
         return None
+    def get_user_profile(self)->dict:
+        """This method get the user profile information"""

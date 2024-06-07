@@ -124,9 +124,7 @@ What do you want to explore?
 3). News.
 4). View my user profile.
 """
-def anime_menu():
-    """This method shows the principal anime menu"""
-    ANIME_MENU="""
+ANIME_MENU="""
         ......   ...  .... ....... ....   ....  ........
         |  _  |  |  \\ |  | |_   _| |   \\ /   |  |  __  |
         | |_| |  |   \\|  |   | |   |         |  |   ___|
@@ -141,31 +139,18 @@ def anime_menu():
         5). Watch Especials.
         6). Back to principal menu.
         """
+def anime_menu():
+    """This method shows the principal anime menu"""
 
     print(ANIME_MENU)
     op=input(print("Please, select an option:"))
-    if op=="1":
-        pass
-    elif op=="2":
-        self.watch_anime("series")
-    elif op=="3":
-        self.watch_anime("movies")
-    elif op=="4":
-        self.watch_anime("ovas")
-    elif op=="5":
-        self.watch_anime("especials")
-    elif op=="6":
-        pass
-         
 
 def main():
     """This if the main file of the project."""
     print(MENU)
     op=input(print("Please, select an option:"))
     if op=="1":
-        
-        print("no hace nada xd")
-        menuAnime.anime_menu()
+        anime_menu()
     elif op=="2":
         pass
     elif op=="3":

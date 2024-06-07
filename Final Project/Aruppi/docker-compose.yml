@@ -1,51 +1,41 @@
-version: '3.3'
+version: '3.8'
 
 services:
-  
-  db-norel-mp:
-    image: mongo:latest
-    restart: always
-    container_name: db_norel_mp
-    ports:
-      - "27017:27017"
-    volumes:
-      - md-mongo-data:/data/db
-    networks:
-      - mp_project
 
-  db-rel-mp:
-    image: postgres:14.12-bullseye
+  mp-project-database:
+    image: postgres:13.15-bullseye
+    container_name: mp_project_db
     restart: always
-    container_name: bd_rel_mp
     environment:
-      POSTGRES_DB: mp_project
-      POSTGRES_USER: mp_user
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mp-project-db
+      POSTGRES_USER: ud_admin
+      POSTGRES_PASSWORD: p4ssw0rd
     ports:
-      - "5432:5432"
+      -  "5432:5432"
     volumes:
-      - md-pg-data:/var/lib/postgresql/data
+      - mp-project-data:/var/lib/postgresql/data
     networks:
-      - mp_project
-  
-  backend-mp:
-    image: backend
+      - mp-project-network
+
+  mp-project-backend:
+    image: mp-project
+    container_name: mp-project-backend
     restart: always
-    container_name: backend_mp
     build:
       context: .
       dockerfile: backend.Dockerfile
     ports:
       - "8080:8080"
     depends_on:
-      - db-rel-mp
+      - mp-project-database
     networks:
-      - mp_project
+      - mp-project-network
 
 volumes:
-  md-data:
-    driver: local
+  mp-project-data:
+    driver:
+      local
 
 networks:
-  mp_project:
+  mp-project-network:
     driver: bridge

@@ -6,9 +6,9 @@ Authors:
 """
 from fastapi import FastAPI
 from pydantic import BaseModel
-from .anime_subsystem import AnimeFacade, anime_menu
-from .radio_subsystem import RadioFacade, radio_menu
-from .news_subsystem import news_menu
+from .anime_subsystem import AnimeFacade
+from .radio_subsystem import RadioFacade
+
 
 menuAnime=AnimeFacade()
 app = FastAPI(
@@ -129,17 +129,91 @@ What do you want to explore?
 3). News.
 4). View my user profile.
 """
+
+ANIME_MENU="""
+        ......   ...  .... ....... ....   ....  ........
+        |  _  |  |  \\ |  | |_   _| |   \\ /   |  |  __  |
+        | |_| |  |   \\|  |   | |   |         |  |   ___|
+        |  _  |  |       |  _| |_  |   |\\ /|  |  |  |___
+        |_| |_|  |__|\\___| |_____| |___|  |__|  |______|
+                 >>> A R U P P I <<< 
+        What do you want to do? 
+        1). Search Anime.
+        2). Watch Series.
+        3). Watch Movies.
+        4). Watch Ovas's.
+        5). Watch Especials.
+        6). Back to principal menu.
+        """
+
+NEWS_MENU="""
+        ...  .... ........ .....    ..... .........
+        |  \\ |  | |  __  | |   |    |   | |   _____|
+        |   \\|  | |   ___|  \\   \\/\\/   /  |_____   |
+        |       | |  |___    \\        /    _____|  |
+        |__|\\___| |______|    \\__/\\__/    |_______ |
+                 >>> A R U P P I <<< 
+        What do you want to do? 
+        1). Search Anime.
+        2). Watch Series.
+        3). Watch Movies.
+        4). Watch Ovas's.
+        5). Watch Especials.
+        6). Back to principal menu.
+        """
+
+RADIO_MENU="""
+        ......   ....... .......   ..........  ......... 
+        |  _  \\  |  _  | |   _  \\  |__    __|  |  __   |
+        | |_|  | | |_| | |  | \\  |    |  |     |  | |  |
+        |     /  |  _  | |  |_/  |  __|  |__   |  |_|  |
+        |__|\\_\\  |_| |_| |______/  |________|  |_______|
+                 >>> A R U P P I <<< 
+        What do you want to do? 
+        1). Search Anime.
+        2). Watch Series.
+        3). Watch Movies.
+        4). Watch Ovas's.
+        5). Watch Especials.
+        6). Back to principal menu.
+        """
+
+
+
+def anime_menu():
+    """This method shows the principal anime menu"""
+    print(ANIME_MENU)
+    op=input(print("Please, select an option:"))
+    print(op)
+
+
+
+def radio_menu():
+    """This method shows the principal radio menu"""
+
+    print(RADIO_MENU)
+    op=input("Please, select an option:")
+    print(op)
+
+
+def news_menu():
+    """This method shows the news menu"""
+    print(NEWS_MENU)
+    op=input("Please, select an option:")
+    print(op)
+
 def main():
     """This if the main file of the project."""
     print(MENU)
-    op=input(print("Please, select an option:"))
+    op=input("Please, select an option:")
     if op=="1":
         anime_menu()
     elif op=="2":
         radio_menu()
     elif op=="3":
         news_menu()
+    elif op=="4":
+        pass
 
 if __name__ == "__main__":
     main()
-

@@ -6,8 +6,9 @@ Authors:
 """
 from fastapi import FastAPI
 from pydantic import BaseModel
-from .anime_subsystem import AnimeFacade
-
+from .anime_subsystem import AnimeFacade, anime_menu
+from .radio_subsystem import RadioFacade, radio_menu
+from .news_subsystem import news_menu
 
 menuAnime=AnimeFacade()
 app = FastAPI(
@@ -111,6 +112,10 @@ async def read_user(user_id: str):
     """
     return {"user_id": user_id}
 
+
+
+#----------------------------
+
 MENU="""
 ......   ......   .... .... ......   ......  .......
 |  _  |  |  _  \\  |  | |  | |  _  \\  |  _  \\ |_   _|  
@@ -124,7 +129,6 @@ What do you want to explore?
 3). News.
 4). View my user profile.
 """
-
 def main():
     """This if the main file of the project."""
     print(MENU)
@@ -132,9 +136,9 @@ def main():
     if op=="1":
         anime_menu()
     elif op=="2":
-        pass
+        radio_menu()
     elif op=="3":
-        pass
+        news_menu()
 
 if __name__ == "__main__":
     main()

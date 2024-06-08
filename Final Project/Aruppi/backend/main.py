@@ -6,7 +6,7 @@ Authors:
 """
 from fastapi import FastAPI
 from pydantic import BaseModel
-from .anime_subsystem import AnimeFacade, Anime
+from .anime_subsystem import AnimeFacade
 
 
 menuAnime=AnimeFacade()
@@ -128,10 +128,10 @@ ANIME_MENU="""
         ......   ...  .... ....... ....   ....  ........
         |  _  |  |  \\ |  | |_   _| |   \\ /   |  |  __  |
         | |_| |  |   \\|  |   | |   |         |  |   ___|
-        |  _  |  |       |  _| |_  |   |\/|  |  |  |___
+        |  _  |  |       |  _| |_  |   |\ /|  |  |  |___
         |_| |_|  |__|\\___| |_____| |___|  |__|  |______|
                  >>> A R U P P I <<< 
-        What do you want to do?
+        What do you want to do? 
         1). Search Anime.
         2). Watch Series.
         3). Watch Movies.

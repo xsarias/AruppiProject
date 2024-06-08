@@ -19,9 +19,12 @@ class AnimeFacade:
     def __init__(self):
         pass
     
-   
-    def watch_anime(self, anime_type:str):
+    def watch_series(self):
         """This method asks the user about the type of content he/she want to watch"""
+    def watch_ovas(self):
+        """This method shows different ovas to watch"""
+    def watch_movies(self):
+        """This methos shows different movies to watch"""
         return None
     def add__to_favorite(self):
         """This method lets users add anime content to their own favorite list """

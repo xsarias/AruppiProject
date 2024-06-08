@@ -10,7 +10,7 @@ from .anime_subsystem import AnimeFacade
 from .radio_subsystem import RadioFacade
 
 
-menuAnime=AnimeFacade()
+
 app = FastAPI(
     title="Aruppi API",
     description="This is an Aruppi aplication.",
@@ -138,12 +138,13 @@ ANIME_MENU="""
         |_| |_|  |__|\\___| |_____| |___|  |__|  |______|
                  >>> A R U P P I <<< 
         What do you want to do? 
-        1). Search Anime.
-        2). Watch Series.
-        3). Watch Movies.
-        4). Watch Ovas's.
-        5). Watch Especials.
-        6). Back to principal menu.
+        1). Search Anime by tittle.
+        2). Search Anime by category.
+        3). Search Anime by type.
+        4). Watch Series.
+        5). Watch Movies.
+        6). Watch Ovas's.
+        7). Back to principal menu.
         """
 
 NEWS_MENU="""
@@ -179,12 +180,34 @@ RADIO_MENU="""
         """
 
 
-
+anime_facade=AnimeFacade()
 def anime_menu():
     """This method shows the principal anime menu"""
     print(ANIME_MENU)
     op=input(print("Please, select an option:"))
     print(op)
+
+    while True:
+        print(ANIME_MENU)
+        option = input("Please, select an option: ").strip()
+
+        if option == '1':
+            anime_facade.search_anime_by_tittle()
+        elif option == '2':
+            anime_facade.search_anime_by_category()
+        elif option == '3':
+            anime_facade.search_anime_by_type()
+        elif option == '4':
+            anime_facade.watch_series()
+        elif option == '5':
+            anime_facade.watch_movies()
+        elif option =='6':
+            anime_facade.watch_ovas()
+        elif option == '7':
+            principal_menu()
+            break
+        else:
+            print("Invalid option. Please try again.")
 
 def radio_menu():
     """This method shows the principal radio menu"""
@@ -201,8 +224,8 @@ def news_menu():
     op=input("Please, select an option:")
     print(op)
 
-def main():
-    """This if the main file of the project."""
+def principal_menu():
+    """This method shows the principal Aruppi's menu"""
     print(MENU)
     op=input("Please, select an option:")
     if op=="1":
@@ -213,6 +236,10 @@ def main():
         news_menu()
     elif op=="4":
         pass
+
+def main():
+    """This if the main file of the project."""
+    principal_menu()
 
 if __name__ == "__main__":
     main()

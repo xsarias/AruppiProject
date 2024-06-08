@@ -124,26 +124,6 @@ What do you want to explore?
 3). News.
 4). View my user profile.
 """
-ANIME_MENU="""
-        ......   ...  .... ....... ....   ....  ........
-        |  _  |  |  \\ |  | |_   _| |   \\ /   |  |  __  |
-        | |_| |  |   \\|  |   | |   |         |  |   ___|
-        |  _  |  |       |  _| |_  |   |\ /|  |  |  |___
-        |_| |_|  |__|\\___| |_____| |___|  |__|  |______|
-                 >>> A R U P P I <<< 
-        What do you want to do? 
-        1). Search Anime.
-        2). Watch Series.
-        3). Watch Movies.
-        4). Watch Ovas's.
-        5). Watch Especials.
-        6). Back to principal menu.
-        """
-def anime_menu():
-    """This method shows the principal anime menu"""
-
-    print(ANIME_MENU)
-    op=input(print("Please, select an option:"))
 
 def main():
     """This if the main file of the project."""

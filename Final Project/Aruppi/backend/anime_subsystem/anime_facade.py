@@ -7,7 +7,7 @@ Authors:
 """
 
 from .anime import Anime
-from .anime_types import Series, Ovas, Specials, Movies
+from .anime_types import Series, Ovas, Movies
 
 ANIME_MENU="""
         ......   ...  .... ....... ....   ....  ........
@@ -25,13 +25,12 @@ ANIME_MENU="""
         6). Back to principal menu.
         """
 
-
 def anime_menu():
     """This method shows the principal anime menu"""
-
     print(ANIME_MENU)
     op=input(print("Please, select an option:"))
-
+    print(op)
+ 
 class AnimeFacade:
     """
     This class represents the Facade of Anime content.
@@ -41,6 +40,8 @@ class AnimeFacade:
     """
     def __init__(self):
         pass
+    
+   
     def watch_anime(self, anime_type:str):
         """This method asks the user about the type of content he/she want to watch"""
         return None

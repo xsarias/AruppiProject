@@ -26,4 +26,4 @@ class RadioFacade:
     def previous(self):
         """This method sets the state to Previous and performs the action"""
         self.radio.previous()
-    
+

@@ -186,14 +186,13 @@ def anime_menu():
     op=input(print("Please, select an option:"))
     print(op)
 
-
-
 def radio_menu():
     """This method shows the principal radio menu"""
-
-    print(RADIO_MENU)
     op=input("Please, select an option:")
     print(op)
+    if op == "1":
+        print("ya casi")
+
 
 
 def news_menu():

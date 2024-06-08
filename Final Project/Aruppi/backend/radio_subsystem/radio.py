@@ -28,7 +28,7 @@ class Play(RadioState):
     """This class changes the state to play"""
     def play(self, radio):
         print("The station " + radio.station + " is already playing")
-
+        return False
     def pause(self, radio):
         print("Pausing the station " + radio.station)
         radio.set_state(radio.pause_state)
@@ -51,7 +51,7 @@ class Pause(RadioState):
 
     def pause(self, radio):
         print("The station " + radio.station + " is already paused")
-
+        return False
     def next(self, radio):
         print("Skipping to the next station from " + radio.station)
         radio.station = "Next Station"  # Example logic for changing station

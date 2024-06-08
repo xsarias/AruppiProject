@@ -40,5 +40,6 @@ class Anime(ABC):
         """this method return if the category anime has the same one."""
         return self.category==category
     
-
-        
+    def is_type(self, anime_type):
+        """This method returns the anime depends of the type"""
+        return self.anime_type==anime_type

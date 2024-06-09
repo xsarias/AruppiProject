@@ -6,104 +6,85 @@ Authors:
 """
 from fastapi import FastAPI
 from pydantic import BaseModel
-from .anime_subsystem import AnimeFacade
+from .anime_subsystem import AnimeFacade, Series, Ovas, Movies
 from .radio_subsystem import RadioFacade
-
-
+from .core_subsystem import Authentication
 
 app = FastAPI(
     title="Aruppi API",
     description="This is an Aruppi aplication.",
     version="1.0.0"
 )
+anime_facade = AnimeFacade()
 
+class SeriesBase(BaseModel):
+    """Base model for anime series."""
+    anime_id: str
+    title: str
+    description: str
+    category: str
+    anime_type: str
+    producer: str
+    episodes_amount: int
 
-#an example 
+@app.post("/admin/anime/add_series/")
+async def create_series(series_base: SeriesBase):
+    """
+    Route to create a new series.
+
+    Parameters:
+        series_base (SeriesBase): Data of the new series.
+
+    Returns:
+        dict: A message indicating successful creation of the series.
+    """
+    series_data = series_base.dict()
+    anime_facade.add_anime(
+        Series(
+            series_data["anime_id"],
+            series_data["title"],
+            series_data["description"],
+            series_data["category"],
+            series_data["anime_type"],
+            series_data["producer"],
+            series_data["episodes_amount"]
+        )
+    )
+    return {"message": "Series created successfully"}
+
 class Search(BaseModel):
-    """This is an example class"""
-    name: str
-    category:str
+    """Base model for searching anime."""
+    search: str
 
-@app.post("/anime/search_by_category")
-async def search_by_category(search_category:Search):
+@app.post("/user/anime/search_by_title")
+async def search_by_title(search_params: Search):
     """
-    This function search an anime by category.
+    Route to search anime by title.
 
-    Args:
-        s.
-
-    Returns:
-        .
-    """
-    return {"find": search_category}
-
-@app.post("/anime/search_by_type")
-async def search_by_type(search_type:Search):
-    """
-    This function search an anime by type.
-
-    Args:
-        s.
+    Parameters:
+        search_params (Search): Search parameters.
 
     Returns:
-        .
+        dict: A list of anime titles matching the title.
     """
-    return {"find": search_type}
+    search_title = search_params.search
+    titles_matching_title = anime_facade.search_anime_by_title(search_title)
+    return {"matching_titles": titles_matching_title}
 
-@app.post("/anime/search_by_tittle")
-async def search_by_tittle(search_tittle:Search):
+@app.post("/user/anime/search_by_category")
+async def search_by_category(search_params: Search):
     """
-    This function search an anime by type.
+    Route to search anime by category.
 
-    Args:
-        s.
+    Parameters:
+        search_params (Search): Search parameters.
 
     Returns:
-        .
+        dict: A list of anime titles matching the category.
     """
-    return {"find": search_tittle}
-
-@app.get("/anime/watch_series")
-async def watch_series():
-    """
-    This function get series to watch.
-    """
-    return {"message": "serie"}
-
-@app.get("/anime/watch_ovas")
-async def watch_ovas():
-    """
-    This function get ovas to watch.
-    """
-    return {"ovas":"ov"}
-
-@app.get("/anime/watch_movies")
-async def watch_movies():
-    """
-    This function get movies to watch.
-    """
-    return {"user_id": "the current user"}
-
-@app.get("/anime/watch_especials")
-async def watch_especials():
-    """
-    This function get especials to watch.
-    """
-    return {"user_id": "the current user"}
-
-@app.get("/radio/listen_radio")
-async def listen_radio():
-    """
-    This function get radio station to listen.
-    """
-    return {"station":"station x"}
-
-@app.get("/news/read_news")
-async def read_news():
-    """
-    This function get news to read.
-    """
-    return {"news":"noticion"}
+    search_category = search_params.search
+    titles_matching_category = anime_facade.search_anime_by_category(search_category)
+    return {"matching_titles": titles_matching_category}
 
 @app.get("/users/{user_id}")
 async def read_user(user_id: str):
@@ -171,7 +152,11 @@ RADIO_MENU="""
         |__|\\_\\  |_| |_| |______/  |________|  |_______|
                  >>> A R U P P I <<< 
         What do you want to do? 
-        1). listen station.
+        1). Search Anime.
+        2). Watch Series.
+        3). Watch Movies.
+        4). Watch Ovas's.
+        5). Watch Especials.
         6). Back to principal menu.
         """
 
@@ -179,10 +164,6 @@ RADIO_MENU="""
 anime_facade=AnimeFacade()
 def anime_menu():
     """This method shows the principal anime menu"""
-    print(ANIME_MENU)
-    op=input(print("Please, select an option:"))
-    print(op)
-
     while True:
         print(ANIME_MENU)
         option = input("Please, select an option: ").strip()
@@ -205,24 +186,13 @@ def anime_menu():
         else:
             print("Invalid option. Please try again.")
 
-radio_facade=RadioFacade("99.80.fm")
-
 def radio_menu():
     """This method shows the principal radio menu"""
+
     print(RADIO_MENU)
     op=input("Please, select an option:")
     print(op)
 
-    while True:
-        print(RADIO_MENU)
-        op = input("Please, select an option: ").strip()
-        if op == '1':
-            radio_facade.show_station()
-        elif op == '2':
-            radio_facade.pause()
-        elif op == '6':
-            principal_menu()
-            break
 
 def news_menu():
     """This method shows the news menu"""

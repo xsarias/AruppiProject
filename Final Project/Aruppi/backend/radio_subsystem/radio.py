@@ -38,7 +38,7 @@ class Station:
 class Radio:
     """This class is the context of the radio states"""
     def __init__(self):
-        self.state=Play()       
+        self.state=Play() 
 
     def Action(self, station):
         self.state.Action(self, station)

@@ -4,21 +4,33 @@ Authors:
 -> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
+
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, SecretStr
 from .anime_subsystem import AnimeFacade, Series, Ovas, Movies
 from .radio_subsystem import RadioFacade
 from .core_subsystem import Authentication
 
 app = FastAPI(
-    title="Aruppi API",
-    description="This is an Aruppi aplication.",
-    version="1.0.0"
+    title="Aruppi API", description="This is an Aruppi aplication.", version="1.0.0"
 )
 anime_facade = AnimeFacade()
 
+class Login(BaseModel):
+    """Base Model for Login"""
+    username: str
+    password: str
+
+@app.post("/login")
+def login(user_info: Login) -> bool:
+    """This service lets authenticate an user using username and password."""
+    user=user_info.dict()
+    auth = Authentication(user["username"], user["password"])
+    return auth.authenticate()
+
 class SeriesBase(BaseModel):
     """Base model for anime series."""
+
     anime_id: str
     title: str
     description: str
@@ -47,7 +59,7 @@ async def create_series(series_base: SeriesBase):
             series_data["category"],
             series_data["anime_type"],
             series_data["producer"],
-            series_data["episodes_amount"]
+            series_data["episodes_amount"],
         )
     )
     return {"message": "Series created successfully"}
@@ -55,6 +67,7 @@ async def create_series(series_base: SeriesBase):
 
 class MoviesBase(BaseModel):
     """Base model for anime movies."""
+
     anime_id: str
     title: str
     description: str
@@ -62,8 +75,10 @@ class MoviesBase(BaseModel):
     anime_type: str
     producer: str
     running_time: float
+
+
 @app.post("/admin/anime/add_movies/")
-async def create_movies(movies_base: MoviesBase):
+def create_movies(movies_base: MoviesBase):
     """
     Route to create a new series.
 
@@ -82,7 +97,7 @@ async def create_movies(movies_base: MoviesBase):
             series_data["category"],
             series_data["anime_type"],
             series_data["producer"],
-            series_data["running_time"]
+            series_data["running_time"],
         )
     )
     return {"message": "Movies created successfully"}
@@ -90,6 +105,7 @@ async def create_movies(movies_base: MoviesBase):
 
 class OvasBase(BaseModel):
     """Base model for anime movies."""
+
     anime_id: str
     title: str
     description: str
@@ -98,8 +114,9 @@ class OvasBase(BaseModel):
     producer: str
     running_time: float
 
+
 @app.post("/admin/anime/add_ovas/")
-async def create_movies(ovas_base: OvasBase):
+def create_ovas(ovas_base: OvasBase):
     """
     Route to create a new Ovas
 
@@ -118,17 +135,20 @@ async def create_movies(ovas_base: OvasBase):
             series_data["category"],
             series_data["anime_type"],
             series_data["producer"],
-            series_data["running_time"]
+            series_data["running_time"],
         )
     )
     return {"message": "Ovas created successfully"}
 
+
 class Search(BaseModel):
     """Base model for searching anime."""
+
     search: str
 
+
 @app.post("/user/anime/search_by_title")
-async def search_by_title(search_params: Search):
+def search_by_title(search_params: Search):
     """
     Route to search anime by title.
 
@@ -142,8 +162,9 @@ async def search_by_title(search_params: Search):
     titles_matching_title = anime_facade.search_anime_by_title(search_title)
     return {"matching_titles": titles_matching_title}
 
+
 @app.post("/user/anime/search_by_category")
-async def search_by_category(search_params: Search):
+def search_by_category(search_params: Search):
     """
     Route to search anime by category.
 
@@ -157,8 +178,9 @@ async def search_by_category(search_params: Search):
     titles_matching_category = anime_facade.search_anime_by_category(search_category)
     return {"matching_titles": titles_matching_category}
 
-@app.post("/user/anime/watch_series")
-async def watch_series():
+
+@app.get("/user/anime/watch_series")
+def watch_series():
     """
     Route to search anime by type.
 
@@ -168,12 +190,13 @@ async def watch_series():
     Returns:
         dict: A list of anime titles matching the type.
     """
- 
+
     titles_matching_type = anime_facade.search_anime_by_type("Series")
-    return {"matching_titles": titles_matching_type}
+    return {"avalaible series": titles_matching_type}
 
-@app.post("/user/anime/watch_movies")
-async def watch_movies():
+
+@app.get("/user/anime/watch_movies")
+def watch_movies():
     """
     Route to search anime by type.
 
@@ -183,12 +206,13 @@ async def watch_movies():
     Returns:
         dict: A list of anime titles matching the type.
     """
- 
+
     titles_matching_type = anime_facade.search_anime_by_type("Movies")
-    return {"matching_titles": titles_matching_type}
+    return {"avalaible movies": titles_matching_type}
 
-@app.post("/user/anime/watch_ovas")
-async def watch_ovas():
+
+@app.get("/user/anime/watch_ovas")
+def watch_ovas():
     """
     Route to search anime by type.
 
@@ -198,6 +222,6 @@ async def watch_ovas():
     Returns:
         dict: A list of anime titles matching the type.
     """
- 
+
     titles_matching_type = anime_facade.search_anime_by_type("Ovas")
-    return {"matching_titles": titles_matching_type}
+    return {"ovas avalaible to watch": titles_matching_type}

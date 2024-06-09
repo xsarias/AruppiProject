@@ -52,6 +52,41 @@ async def create_series(series_base: SeriesBase):
     )
     return {"message": "Series created successfully"}
 
+
+class MoviesBase(BaseModel):
+    """Base model for anime movies."""
+    anime_id: str
+    title: str
+    description: str
+    category: str
+    anime_type: str
+    producer: str
+    running_time: float
+@app.post("/admin/anime/add_movies/")
+async def create_movies(movies_base: MoviesBase):
+    """
+    Route to create a new series.
+
+    Parameters:
+        series_base (MoviesBase): Data of the movies series.
+
+    Returns:
+        dict: A message indicating successful creation of the series.
+    """
+    series_data = movies_base.dict()
+    anime_facade.add_anime(
+        Movies(
+            series_data["anime_id"],
+            series_data["title"],
+            series_data["description"],
+            series_data["category"],
+            series_data["anime_type"],
+            series_data["producer"],
+            series_data["running_time"]
+        )
+    )
+    return {"message": "Movies created successfully"}
+
 class Search(BaseModel):
     """Base model for searching anime."""
     search: str

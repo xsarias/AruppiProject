@@ -171,11 +171,7 @@ RADIO_MENU="""
         |__|\\_\\  |_| |_| |______/  |________|  |_______|
                  >>> A R U P P I <<< 
         What do you want to do? 
-        1). Search Anime.
-        2). Watch Series.
-        3). Watch Movies.
-        4). Watch Ovas's.
-        5). Watch Especials.
+        1). listen station.
         6). Back to principal menu.
         """
 
@@ -209,14 +205,24 @@ def anime_menu():
         else:
             print("Invalid option. Please try again.")
 
+radio_facade=RadioFacade("99.80.fm")
+
 def radio_menu():
     """This method shows the principal radio menu"""
+    print(RADIO_MENU)
     op=input("Please, select an option:")
     print(op)
-    if op == "1":
-        print("ya casi")
 
-
+    while True:
+        print(RADIO_MENU)
+        op = input("Please, select an option: ").strip()
+        if op == '1':
+            radio_facade.show_station()
+        elif op == '2':
+            radio_facade.pause()
+        elif op == '6':
+            principal_menu()
+            break
 
 def news_menu():
     """This method shows the news menu"""

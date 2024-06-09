@@ -7,88 +7,41 @@ Authors:
 from abc import ABC, abstractmethod
 
 class RadioState(ABC):
-    """This class provides the radio states"""
-    @abstractmethod
-    def play(self, radio):
-        """This method defines the action to play the station"""
+    """This abstract class represent the actuals states of object"""
 
     @abstractmethod
-    def pause(self, radio):
-        """This method defines the action to pause the station"""
-
-    @abstractmethod
-    def next(self, radio):
-        """This method defines the action to go to the next station"""
-
-    @abstractmethod
-    def previous(self, radio):
-        """This method defines the action to go to the previous station"""
+    def Action(self,radio,station):
+        pass
 
 class Play(RadioState):
-    """This class changes the state to play"""
-    def play(self, radio):
-        print("The station " + radio.station + " is already playing")
-        return False
-    def pause(self, radio):
-        print("Pausing the station " + radio.station)
-        radio.set_state(radio.pause_state)
+    """This class is play state of the object"""
 
-    def next(self, radio):
-        print("Skipping to the next station from " + radio.station)
-        radio.station = "Next Station"  # Example logic for changing station
-        radio.set_state(radio.play_state)
-
-    def previous(self, radio):
-        print("Going back to the previous station from " + radio.station)
-        radio.station = "Previous Station"  # Example logic for changing station
-        radio.set_state(radio.play_state)
+    def Action(self, radio, station):
+        print(f"The {station.name} is playing")
 
 class Pause(RadioState):
-    """This class changes the state to pause"""
-    def play(self, radio):
-        print("Resuming the station " + radio.station)
-        radio.set_state(radio.play_state)
+    """This class is pause state of the object"""
+    def Action(self, radio, station):
+        print(f"The {station.name} is paused")
 
-    def pause(self, radio):
-        print("The station " + radio.station + " is already paused")
-        return False
-    def next(self, radio):
-        print("Skipping to the next station from " + radio.station)
-        radio.station = "Next Station"  # Example logic for changing station
-        radio.set_state(radio.play_state)
 
-    def previous(self, radio):
-        print("Going back to the previous station from " + radio.station)
-        radio.station = "Previous Station"  # Example logic for changing station
-        radio.set_state(radio.play_state)
+class Station:
+    """This class defines the object that has states"""
 
+    def __init__(self):
+        self.name="Olympica"
+
+    def Next_station(self):
+        pass
+    def Previous_station(self):
+        pass
 class Radio:
-    """This class represents the context of radio state"""
+    """This class is the context of the radio states"""
+    def __init__(self):
+        self.state=Play()       
 
-    def __init__(self, station) -> None:
-        self.play_state = Play()
-        self.pause_state = Pause()
-        self.station = station
-        self.state = self.play_state  # Default state
+    def Action(self, station):
+        self.state.Action(self, station)
 
-    def set_state(self, state: RadioState) -> None:
-        """This method sets the state of the radio"""
-        self.state = state
-
-    def play(self):
-        """This method sets the state to Play and performs the action"""
-        self.state.play(self)
-
-    def pause(self):
-        """This method sets the state to Pause and performs the action"""
-        self.state.pause(self)
-
-    def next(self):
-        """This method sets the state to Next and performs the action"""
-        self.state.next(self)
-
-    def previous(self):
-        """This method sets the state to Previous and performs the action"""
-        self.state.previous(self)
-
-# Ejemplo de uso
+    def set_state(self, state:RadioState):
+        self.state=state

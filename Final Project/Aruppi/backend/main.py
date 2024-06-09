@@ -121,17 +121,136 @@ async def search_by_category(search_params: Search):
     titles_matching_category = anime_facade.search_anime_by_category(search_category)
     return {"matching_titles": titles_matching_category}
 
-@app.post("/user/anime/search_by_type")
-async def search_by_type(search_params: Search):
+@app.get("/users/{user_id}")
+async def read_user(user_id: str):
     """
-    Route to search anime by type.
-
-    Parameters:
-        search_params (Search): Search parameters.
-
-    Returns:
-        dict: A list of anime titles matching the type.
+    This function get user information.
     """
-    search_type = search_params.search
-    titles_matching_type = anime_facade.search_anime_by_type(search_type)
-    return {"matching_titles": titles_matching_type}
+    return {"user_id": user_id}
+
+
+
+#----------------------------
+
+MENU="""
+......   ......   .... .... ......   ......  .......
+|  _  |  |  _  \\  |  | |  | |  _  \\  |  _  \\ |_   _|  
+| |_| |  | |_|  | |  | |  | | |_\\  | | |_\\  |  | |
+|  _  |  |     /  |  |_|  | |   __/  |   __/  _| |_
+|_| |_|  |__|\\_\\  |_______| |__|     |__|    |_____|
+        >>>> ALL JAPAN IN A SAME PLACE <<<
+What do you want to explore?
+1). Anime.
+2). Radio.
+3). News.
+4). View my user profile.
+"""
+
+ANIME_MENU="""
+        ......   ...  .... ....... ....   ....  ........
+        |  _  |  |  \\ |  | |_   _| |   \\ /   |  |  __  |
+        | |_| |  |   \\|  |   | |   |         |  |   ___|
+        |  _  |  |       |  _| |_  |   |\\ /|  |  |  |___
+        |_| |_|  |__|\\___| |_____| |___|  |__|  |______|
+                 >>> A R U P P I <<< 
+        What do you want to do? 
+        1). Search Anime by tittle.
+        2). Search Anime by category.
+        3). Search Anime by type.
+        4). Watch Series.
+        5). Watch Movies.
+        6). Watch Ovas's.
+        7). Back to principal menu.
+        """
+
+NEWS_MENU="""
+        ...  .... ........ .....    ..... .........
+        |  \\ |  | |  __  | |   |    |   | |   _____|
+        |   \\|  | |   ___|  \\   \\/\\/   /  |_____   |
+        |       | |  |___    \\        /    _____|  |
+        |__|\\___| |______|    \\__/\\__/    |_______ |
+                 >>> A R U P P I <<< 
+        What do you want to do? 
+        1). Search Anime.
+        2). Watch Series.
+        3). Watch Movies.
+        4). Watch Ovas's.
+        5). Watch Especials.
+        6). Back to principal menu.
+        """
+
+RADIO_MENU="""
+        ......   ....... .......   ..........  ......... 
+        |  _  \\  |  _  | |   _  \\  |__    __|  |  __   |
+        | |_|  | | |_| | |  | \\  |    |  |     |  | |  |
+        |     /  |  _  | |  |_/  |  __|  |__   |  |_|  |
+        |__|\\_\\  |_| |_| |______/  |________|  |_______|
+                 >>> A R U P P I <<< 
+        What do you want to do? 
+        1). Search Anime.
+        2). Watch Series.
+        3). Watch Movies.
+        4). Watch Ovas's.
+        5). Watch Especials.
+        6). Back to principal menu.
+        """
+
+
+anime_facade=AnimeFacade()
+def anime_menu():
+    """This method shows the principal anime menu"""
+    while True:
+        print(ANIME_MENU)
+        option = input("Please, select an option: ").strip()
+
+        if option == '1':
+            anime_facade.search_anime_by_tittle()
+        elif option == '2':
+            anime_facade.search_anime_by_category()
+        elif option == '3':
+            anime_facade.search_anime_by_type()
+        elif option == '4':
+            anime_facade.watch_series()
+        elif option == '5':
+            anime_facade.watch_movies()
+        elif option =='6':
+            anime_facade.watch_ovas()
+        elif option == '7':
+            principal_menu()
+            break
+        else:
+            print("Invalid option. Please try again.")
+
+def radio_menu():
+    """This method shows the principal radio menu"""
+
+    print(RADIO_MENU)
+    op=input("Please, select an option:")
+    print(op)
+
+
+def news_menu():
+    """This method shows the news menu"""
+    print(NEWS_MENU)
+    op=input("Please, select an option:")
+    print(op)
+
+def principal_menu():
+    """This method shows the principal Aruppi's menu"""
+    print(MENU)
+    op=input("Please, select an option:")
+    if op=="1":
+        anime_menu()
+    elif op=="2":
+        radio_menu()
+    elif op=="3":
+        news_menu()
+    elif op=="4":
+        pass
+
+def main():
+    """This if the main file of the project."""
+    principal_menu()
+
+if __name__ == "__main__":
+    main()

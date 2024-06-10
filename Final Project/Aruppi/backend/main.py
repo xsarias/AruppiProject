@@ -5,20 +5,12 @@ Authors:
 -> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
-<<<<<<< HEAD
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from .anime_subsystem import AnimeFacade, Series, Ovas, Movies
 from .news_subsystem import NewsFacade, News
 from .core_subsystem import Authentication
 from .radio_subsystem import RadioFacade, Station, Play, Pause
-=======
-from .anime_subsystem import AnimeFacade, Series, Ovas, Movies
-from .radio_subsystem import RadioFacade, Radio
-from .core_subsystem import Authentication
-from fastapi import FastAPI
-from pydantic import BaseModel, SecretStr
->>>>>>> f70b2d58018f5ef18f4e41ee7f8da2971975d0d4
 
 app = FastAPI(
     title="Aruppi API", description="This is an Aruppi aplication.", version="1.0.0"
@@ -234,7 +226,6 @@ def watch_ovas():
     """
 
     titles_matching_type = anime_facade.search_anime_by_type("Ovas")
-<<<<<<< HEAD
     return {"matching_titles": titles_matching_type}
 
 class NewsBase(BaseModel):
@@ -309,7 +300,3 @@ async def pause(station_name:str):
     radio_facade.set_state(Pause())
     radio_facade.action()
     return {"message": f"Station {station_name} is now paused"}
-=======
-    return {"ovas avalaible to watch": titles_matching_type}
-
->>>>>>> f70b2d58018f5ef18f4e41ee7f8da2971975d0d4

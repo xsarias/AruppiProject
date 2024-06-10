@@ -33,7 +33,7 @@ class RadioFacade:
         """
         station = self.radio_dao.get_current_station()
         if station:
-            self.radio.Action(station)
+            self.radio.action(station)
         else:
             raise ValueError("No current station set")
 

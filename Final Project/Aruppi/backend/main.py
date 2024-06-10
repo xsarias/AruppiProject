@@ -10,7 +10,7 @@ from pydantic import BaseModel
 from .anime_subsystem import AnimeFacade, Series, Ovas, Movies
 from .news_subsystem import NewsFacade, News
 from .core_subsystem import Authentication
-from .radio_subsystem import RadioFacade, Station
+from .radio_subsystem import RadioFacade, Station, Play, Pause 
 
 
 app = FastAPI(
@@ -337,7 +337,3 @@ async def pause(station_name: str):
     radio_facade.set_state(Pause())
     radio_facade.action()
     return {"message": f"Station {station_name} is now paused"}
-<<<<<<< HEAD
-
-=======
->>>>>>> 42a55c3b0b8120b00c384daa99b6d8631325bc69

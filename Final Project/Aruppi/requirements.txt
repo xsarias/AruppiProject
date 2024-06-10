@@ -4,5 +4,13 @@ pytest
 black
 fastapi
 uvicorn
-sqlalchemy
 pydantic
+mysql-connector-python
+mysqlclient
+pydantic
+PyMySQL
+SQLAlchemy
+starlette
+pylint
+sqlalchemy
+

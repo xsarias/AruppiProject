@@ -8,6 +8,7 @@ Authors:
 
 from abc import ABC, abstractmethod
 
+
 class Anime(ABC):
     """
     This class represents anime behaviors in the application.
@@ -21,7 +22,15 @@ class Anime(ABC):
         producer (str): The company or studio responsible for creating the anime.
     """
 
-    def __init__(self, anime_id: str, title: str, description: str, category: str, anime_type: str, producer: str):
+    def __init__(
+        self,
+        anime_id: str,
+        title: str,
+        description: str,
+        category: str,
+        anime_type: str,
+        producer: str,
+    ):
         self.anime_id = anime_id
         self.title = title
         self.description = description
@@ -73,4 +82,3 @@ class Anime(ABC):
         Returns:
         str: A string representation of the anime details.
         """
-        

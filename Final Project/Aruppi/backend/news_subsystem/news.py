@@ -6,13 +6,10 @@ Authors:
 """
 
 class News:
-    """This class control of news links about Japanese cultur"""
+    """This class provides news information"""
     def __init__(self, info,title):
         self.title=title
         self.information=info
-    
+
     def read_news(self):
-        """This method shows a list of news"""            
-        
-
-
+        """This method shows a list of news"""

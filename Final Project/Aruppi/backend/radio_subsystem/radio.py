@@ -4,44 +4,51 @@ Authors:
 -> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
-from abc import ABC, abstractmethod
-
-class RadioState(ABC):
-    """This abstract class represent the actuals states of object"""
-
-    @abstractmethod
-    def Action(self,radio,station):
-        pass
-
-class Play(RadioState):
-    """This class is play state of the object"""
-
-    def Action(self, radio, station):
-        print(f"The {station.name} is playing")
-
-class Pause(RadioState):
-    """This class is pause state of the object"""
-    def Action(self, radio, station):
-        print(f"The {station.name} is paused")
-
+from .radio_state import RadioState, Play
 
 class Station:
-    """This class defines the object that has states"""
+    """
+    This class represent the station, its has states
+    """
 
     def __init__(self, name):
-        self.name=name
+        """
+        initialize the class with a name of station.
 
-    def Next_station(self):
-        pass
-    def Previous_station(self):
-        pass
+        Args:
+            name (str): station name.
+        """
+        self.name = name
+
+    def next_station(self):
+        """go to the next station"""
+
+    def previous_station(self):
+        """go to the previous station"""
+
 class Radio:
-    """This class is the context of the radio states"""
-    def __init__(self):
-        self.state=Play() 
+    """
+    This class is the context for the radio states.
+    """
 
-    def Action(self, station):
+    def __init__(self):
+        """Initializes the Radio object with a default state of Play."""
+        self.state = Play()
+
+    def action(self, station):
+        """
+        Performs an action based on the current state.
+
+        Args:
+            station: The current station object.
+        """
         self.state.Action(self, station)
 
-    def set_state(self, state:RadioState):
-        self.state=state
+    def set_state(self, state: RadioState):
+        """
+        Sets the state of the radio.
+
+        Args:
+            state (RadioState): The state object to set.
+        """
+        self.state = state

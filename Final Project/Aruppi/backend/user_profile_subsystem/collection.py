@@ -1,11 +1,4 @@
-"""
-This is a main file of Aruppi project (initial point).
-Authors:
--> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
--> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
-"""
-
-from .collection_strategy import CollectionStrategy
+from backend.user_profile_subsystem.collection_strategy import CollectionStrategy
 
 class Collection:
     """
@@ -45,3 +38,4 @@ class Collection:
         """
         Displays the contents of the collection.
         """
+        self.strategy.show_collection()

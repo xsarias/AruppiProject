@@ -1,10 +1,3 @@
-"""
-This is the main file for the Aruppi project (entry point).
-Authors:
--> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
--> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
-"""
-
 from abc import ABC, abstractmethod
 
 class CollectionStrategy(ABC):
@@ -12,37 +5,46 @@ class CollectionStrategy(ABC):
     This abstract class defines a strategy for adding items to a collection.
     Each concrete strategy must implement the add_to method.
     """
+    def __init__(self):
+        self.items = []
+
     @abstractmethod
     def add_to(self, anime_id):
-        """Adds an anime to a collection."""  
-    @abstractmethod
+        """Adds an anime to a collection."""
+
     def show_collection(self):
-        """Shows collection content"""  
+        """Shows collection content"""
+        print(self.items)
 
 class FavoritesStrategy(CollectionStrategy):
     """
     Concrete strategy for adding an anime to the favorites collection.
     """
     def add_to(self, anime_id):
-        pass
+        self.items.append(anime_id)
+        print(f"{anime_id} added to Favorites")
+
     def show_collection(self):
-        pass
+        print("Favorites:", self.items)
 
 class RecommendedStrategy(CollectionStrategy):
     """
     Concrete strategy for adding an anime to the recommended collection.
     """
     def add_to(self, anime_id):
-        print("Add to")
+        self.items.append(anime_id)
+        print(f"{anime_id} added to Recommended")
+
     def show_collection(self):
-        pass
+        print("Recommended:", self.items)
 
 class QueueStrategy(CollectionStrategy):
     """
-    Concrete strategy fir adding anime to queue.
+    Concrete strategy for adding anime to queue.
     """
     def add_to(self, anime_id):
-        pass
+        self.items.append(anime_id)
+        print(f"{anime_id} added to Queue")
+
     def show_collection(self):
-        pass
-        
+        print("Queue:", self.items)

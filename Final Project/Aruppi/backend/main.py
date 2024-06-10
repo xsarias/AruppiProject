@@ -1,15 +1,15 @@
 """
-This is a main file of Aruppi project (initial point).
+This is a main file of Aruppi project (initial point). Where web services
+are defined to interact with external users (also front-end clients)
 Authors:
 -> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
-
+from .anime_subsystem import AnimeFacade, Series, Ovas, Movies
+from .radio_subsystem import RadioFacade, Radio
+from .core_subsystem import Authentication
 from fastapi import FastAPI
 from pydantic import BaseModel, SecretStr
-from .anime_subsystem import AnimeFacade, Series, Ovas, Movies
-from .radio_subsystem import RadioFacade
-from .core_subsystem import Authentication
 
 app = FastAPI(
     title="Aruppi API", description="This is an Aruppi aplication.", version="1.0.0"
@@ -225,3 +225,4 @@ def watch_ovas():
 
     titles_matching_type = anime_facade.search_anime_by_type("Ovas")
     return {"ovas avalaible to watch": titles_matching_type}
+

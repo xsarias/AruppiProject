@@ -10,20 +10,20 @@ class RadioState(ABC):
     """This abstract class represent the actuals states of object"""
 
     @abstractmethod
-    def action(self, radio, station):
+    def action(self, station):
         """This abstract method represent an action inside radio"""
 
 
 class Play(RadioState):
     """This class is play state of the object"""
 
-    def action(self, radio, station):
+    def action(self,  station):
         print(f"The {station.name} is playing")
 
 
 class Pause(RadioState):
     """This class is pause state of the object"""
 
-    def action(self, radio, station):
+    def action(self,  station):
         print(f"The {station.name} is paused")
 

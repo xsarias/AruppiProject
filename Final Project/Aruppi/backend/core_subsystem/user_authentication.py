@@ -1,11 +1,13 @@
 """
 This module has some classes related to users and authentication.
-
-Author: Carlos Andrés Sierra <cavirguezs@udistrital.edu.co>
+Authors:
+-> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
+-> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
 
 import json
 import os
+
 
 class User:
     """This is a data class to represents the User information."""
@@ -18,7 +20,7 @@ class User:
         """This method returns the username."""
         return self.__username
 
-    def is_grant(self, grant: bool):
+    def is_grant(self):
         """This method returns if the user has a grant."""
         return self.__grants
 
@@ -36,8 +38,7 @@ class Authentication:
         # Build the path to the users.json file dynamically, to be available anywhere.
         current_dir = os.path.dirname(os.path.abspath(__file__))
         file_path = os.path.join(current_dir, "users.json")
-        
-        
+
         with open(file_path, "r", encoding="UTF-8") as file:
             users = json.load(file)
 
@@ -48,11 +49,9 @@ class Authentication:
             ):
                 self.__grants = user["grants"]
                 return True
-          
+
         return False
 
-
-        
     def userdata(self) -> User:
         """This method returns the user data."""
         return User(self.__username, self.__grants)
@@ -66,7 +65,7 @@ class Authentication:
         new_user = {
             "username": self.__username,
             "password": self.__password,
-            "grants": grants
+            "grants": grants,
         }
 
         with open(file_path, "r+", encoding="UTF-8") as file:

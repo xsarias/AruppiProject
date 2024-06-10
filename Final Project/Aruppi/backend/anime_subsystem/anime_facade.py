@@ -1,12 +1,13 @@
 """
-This module contains a Facade class that provides a simple interface to the complex logic about Anime Subsystem.
+This module contains a Facade class that provides a simple interface to the complex logic
+about Anime Subsystem.
 Authors:
 -> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
 
-from .anime_types import Series, Ovas, Movies
 from .anime_dao import AnimeDAO
+
 
 class AnimeFacade:
     """
@@ -22,6 +23,7 @@ class AnimeFacade:
         watch_ovas: Retrieves and displays all OVAs anime.
         get_anime_info: Displays information of a specific anime.
     """
+
     def __init__(self):
         self.dao = AnimeDAO()
 
@@ -79,7 +81,9 @@ class AnimeFacade:
         print("Series Available:")
         for i, title in enumerate(series_titles, start=1):
             print(f"{i}. {title}")
-        selection = int(input("Select a series to view details (enter number): ").strip())
+        selection = int(
+            input("Select a series to view details (enter number): ").strip()
+        )
         self.get_anime_info(series_titles[selection - 1])
 
     def watch_movies(self):
@@ -90,7 +94,9 @@ class AnimeFacade:
         print("Movies Available:")
         for i, title in enumerate(movies_titles, start=1):
             print(f"{i}. {title}")
-        selection = int(input("Select a movie to view details (enter number): ").strip())
+        selection = int(
+            input("Select a movie to view details (enter number): ").strip()
+        )
         self.get_anime_info(movies_titles[selection - 1])
 
     def watch_ovas(self):
@@ -113,7 +119,9 @@ class AnimeFacade:
         """
         anime_found = self.dao.get_anime_by_title(title)
         if anime_found:
-            anime = anime_found[0]  # Assuming titles are unique and we take the first match
+            anime = anime_found[
+                0
+            ]  # Assuming titles are unique and we take the first match
             print("Anime Information:")
             print(anime.get_details())
         else:

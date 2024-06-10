@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
 
-  mp-project-database:
+  mysql-database:
     image: postgres:13.15-bullseye
     container_name: mp_project_db
     restart: always

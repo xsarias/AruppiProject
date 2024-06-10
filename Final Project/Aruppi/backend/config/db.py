@@ -17,7 +17,7 @@ engine = create_engine(
 Session = sessionmaker(bind=engine)
 session = Session()
 metadata = MetaData()
-series = Table("series",
+series = Table ("series",
                 metadata,
                 Column("anime_id", Integer(10), primary_key=True, autoincrement=True),
                 Column("title", String(50)),
@@ -26,8 +26,8 @@ series = Table("series",
                 Column("anime_type", String(50)),
                 Column("producer", String(50)),
                 Column("episodes_amount", Integer(10))
-                )
-movies = Table("movies",
+             )
+movies = Table ("movies",
                 metadata,
                 Column("anime_id", Integer(10), primary_key=True, autoincrement=True),
                 Column("title", String(50)),
@@ -46,13 +46,13 @@ ovas = Table("ovas",
                 Column("anime_type", String(50)),
                 Column("producer", String(50)),
                 Column("episodes_amount", Integer(10))
-                )
+            )
 user = Table("user",
                 metadata,
                 Column("username", String(50), primary_key=True),
                 Column("password", String(50)),
                 Column("grants", String(50))
-                )
+            )
 station = Table("station",
                 metadata,
                 Column("station", String, primary_key=True),
@@ -61,5 +61,5 @@ news = Table("news",
                 metadata,
                 Column("title", String, primary_key=True),
                 Column("info", String)
-                )
+            )
 metadata.create_all(engine)

@@ -2,3 +2,7 @@ numpy
 faker
 pytest
 black
+fastapi
+uvicorn
+sqlalchemy
+pydantic

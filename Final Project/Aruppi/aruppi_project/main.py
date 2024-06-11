@@ -10,8 +10,13 @@ from .anime_subsystem import AnimeFacade, Series, Ovas, Movies
 from .news_subsystem import NewsFacade, News
 from .core_subsystem import Authentication
 from .radio_subsystem import RadioFacade, Station, Play, Pause
+<<<<<<< HEAD:Final Project/Aruppi/aruppi_project/main.py
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+=======
+
+
+>>>>>>> 707e375024577889f0558e889befc6c88851d810:Final Project/Aruppi/backend/main.py
 app = FastAPI(
     title="Aruppi API", description="This is an Aruppi aplication.", version="1.0.0"
 )

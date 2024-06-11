@@ -5,12 +5,8 @@ black
 fastapi
 uvicorn
 pydantic
-mysql-connector-python
-mysqlclient
 pydantic
 PyMySQL
 SQLAlchemy
 starlette
 pylint
-sqlalchemy
-

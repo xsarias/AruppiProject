@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "backend"
+name = "aruppi_project"
 version = "0.1.0"
 description = "This is an application of Japanese Culture, called Aruppi."
-authors = ["xsarias <xsariasa@udistrital.edu.co>"]
+authors = ["xsarias <xsariasa@udistrital.edu.co>", "cach <cacelish@udistrital.edu.co"]
 readme = "README.md"
+
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -22,10 +23,10 @@ pylint = "^3.2.2"
 black = "^24.4.2"
 pre-commit = "^3.7.1"
 
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+
 [tool.poetry.scripts]
-cli_script = "backend.main:main"
+cli_script = "aruppi_project.main:main"

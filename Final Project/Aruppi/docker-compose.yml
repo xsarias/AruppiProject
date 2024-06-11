@@ -10,7 +10,7 @@ services:
       POSTGRES_USER: ud_admin
       POSTGRES_PASSWORD: p4ssw0rd
     ports:
-      - "5432:5432"
+      - "5433:5433"
     volumes:
       - mp-project-data:/var/lib/postgresql/data
     networks:
@@ -22,7 +22,7 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: backend.Dockerfile
     ports:
       - "8080:8080"
     depends_on:

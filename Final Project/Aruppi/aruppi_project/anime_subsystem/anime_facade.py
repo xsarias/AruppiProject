@@ -5,7 +5,7 @@ Authors:
 -> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
-from .add_content_strategy import AddMoviesAnime, AddOvasAnime, AddSeriesAnime
+from .add_content_strategy import AddMoviesAnime, AddOvasAnime, AddSeriesAnime, AddContentStrategy
 from .get_content_strategy import GetAnimeByCategory, GetAnimeByType, GetAnimeByTitle
 from .anime_types import Movies, Ovas, Series  
 
@@ -27,25 +27,58 @@ class AnimeFacade:
     def __init__(self):
         pass
 
-    def add_anime(self, anime):
+
+    def add_anime_series(self, anime_data):
         """
         Adds an anime object to the anime list.
 
         Parameters:
         anime (Anime): The anime object to be added.
         """
-        if isinstance(anime, Movies):
-            strategy = AddMoviesAnime()
-        elif isinstance(anime, Ovas):
-            strategy = AddOvasAnime()
-        elif isinstance(anime, Series):
-            strategy = AddSeriesAnime()
-        else:
-            raise ValueError("Unknown anime type")
-
-        strategy.add_content(anime)
+        strategy=AddSeriesAnime()
+        strategy.add_content(Series(
+            anime_data["anime_id"],
+            anime_data["title"],
+            anime_data["description"],
+            anime_data["category"],
+            anime_data["anime_type"],
+            anime_data["producer"],
+            anime_data["episodes_amount"],
+        ))
         return "Anime added successfully"
 
+    def add_anime_ovas(self, anime_data):
+        """
+        Adds an anime object to the ovas data base.
+        """
+        strategy=AddOvasAnime()
+        strategy.add_content(Ovas(
+            anime_data["anime_id"],
+            anime_data["title"],
+            anime_data["description"],
+            anime_data["category"],
+            anime_data["anime_type"],
+            anime_data["producer"],
+            anime_data["running_time"],
+        ))
+        return "Anime added successfully"
+    
+    def add_anime_movies(self, anime_data):
+        """
+        Add an anime object to the movies data base
+        """
+        strategy=AddOvasAnime()
+        strategy.add_content(Movies(
+            anime_data["anime_id"],
+            anime_data["title"],
+            anime_data["description"],
+            anime_data["category"],
+            anime_data["anime_type"],
+            anime_data["producer"],
+            anime_data["running_time"],
+        ))
+        return "Movies added successfully"
+        
     def search_anime_by_title(self, title):
         """
         Searches for anime by title.

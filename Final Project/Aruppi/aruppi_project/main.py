@@ -6,17 +6,13 @@ Authors:
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
 
-from .anime_subsystem import AnimeFacade, Series, Ovas, Movies
 from .news_subsystem import NewsFacade, News
 from .core_subsystem import Authentication
 from .radio_subsystem import RadioFacade, Station, Play, Pause
-<<<<<<< HEAD:Final Project/Aruppi/aruppi_project/main.py
+from .anime_subsystem import AnimeFacade
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-=======
 
-
->>>>>>> 707e375024577889f0558e889befc6c88851d810:Final Project/Aruppi/backend/main.py
 app = FastAPI(
     title="Aruppi API", description="This is an Aruppi aplication.", version="1.0.0"
 )
@@ -96,17 +92,7 @@ async def create_series(series_base: SeriesBase):
         dict: A message indicating successful creation of the series.
     """
     series_data = series_base.dict()
-    anime_facade.add_anime(
-        Series(
-            series_data["anime_id"],
-            series_data["title"],
-            series_data["description"],
-            series_data["category"],
-            series_data["anime_type"],
-            series_data["producer"],
-            series_data["episodes_amount"],
-        )
-    )
+    anime_facade.add_anime_series(series_data)
     return {"message": "Series created successfully"}
 
 @app.post("/admin/anime/add_movies/")
@@ -120,18 +106,9 @@ def create_movies(movies_base: MoviesBase):
     Returns:
         dict: A message indicating successful creation of the series.
     """
-    series_data = movies_base.dict()
-    anime_facade.add_anime(
-        Movies(
-            series_data["anime_id"],
-            series_data["title"],
-            series_data["description"],
-            series_data["category"],
-            series_data["anime_type"],
-            series_data["producer"],
-            series_data["running_time"],
-        )
-    )
+    movies_data = movies_base.dict()
+    
+    anime_facade.add_anime_movies(movies_data)
     return {"message": "Movies created successfully"}
 
 @app.post("/admin/anime/add_ovas/")
@@ -146,17 +123,7 @@ def create_ovas(ovas_base: OvasBase):
         dict: A message indicating successful creation of the ovas.
     """
     series_data = ovas_base.dict()
-    anime_facade.add_anime(
-        Ovas(
-            series_data["anime_id"],
-            series_data["title"],
-            series_data["description"],
-            series_data["category"],
-            series_data["anime_type"],
-            series_data["producer"],
-            series_data["running_time"],
-        )
-    )
+    anime_facade.add_anime_ovas(series_data)
     return {"message": "Ovas created successfully"}
 
 @app.post("/admin/news/add_news/")
@@ -188,10 +155,8 @@ def search_by_title(search_params: Search):
     Returns:
         dict: A list of anime titles matching the title.
     """
-    search_title = search_params.search
-    titles_matching_title = anime_facade.search_anime_by_title(search_title)
-    return {"matching_titles": titles_matching_title}
-
+    results=anime_facade.search_anime_by_title(search_params)
+    return results
 
 @app.post("/user/anime/search_by_category")
 def search_by_category(search_params: Search):

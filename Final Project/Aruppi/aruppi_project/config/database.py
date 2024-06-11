@@ -1,11 +1,12 @@
 import os
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Float
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Float, insert
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 
 
-# Cargar variables de entorno desde el archivo .env
-load_dotenv()
+# # Cargar las variables de entorno desde el archivo .env
+dotenv_path = os.path.join(os.path.dirname(__file__),'.env')
+load_dotenv(dotenv_path)
 
 # Obtener las variables de entorno
 DB_USER = os.getenv('DB_USER')
@@ -14,9 +15,11 @@ DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
 DB_NAME = os.getenv('DB_NAME')
 
-# Configurar la URL de conexión a la base de datos MySQL
-DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-engine = create_engine(DATABASE_URL)
+
+global_DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
+# # Crear el engine de SQLAlchemy
+engine = create_engine(global_DATABASE_URL)
 
 # Crear un objeto MetaData para definir las tablas
 metadata = MetaData()
@@ -59,7 +62,8 @@ user = Table("user", metadata,
 )
 
 station = Table("station", metadata,
-    Column("station", String(50), primary_key=True)
+    Column("station", String(50), primary_key=True),
+    Column("Name", String(50))
 )
 
 news = Table("news", metadata,
@@ -84,3 +88,23 @@ favorites = Table("favorites", metadata,
 # Crear las tablas en la base de datos
 metadata.create_all(engine)
 
+
+
+# Datos a insertar
+anime_data = {
+    "title": "Example Series",
+    "description": "This is an example series.",
+    "category": "Action",
+    "anime_type": "Series",
+    "producer": "Example Producer",
+    "episodes_amount": 12
+}
+
+# Crear una sentencia de inserción
+insert_statement = insert(series).values(anime_data)
+
+try:
+    with engine.connect() as conn:
+        conn.execute(insert_statement)
+except Exception as e:
+    print("Ocurrió un error al insertar datos:", e)

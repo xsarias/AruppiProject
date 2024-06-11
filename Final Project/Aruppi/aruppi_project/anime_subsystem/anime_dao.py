@@ -4,22 +4,12 @@ Authors:
 -> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
-
-import os
-from ..config.database import series, ovas, movies
 from sqlalchemy.sql import select
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Float
+from sqlalchemy.orm import sessionmaker
+from ..config import engine, movies, ovas, series
 
-DB_USER = os.getenv("DB_USER")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = os.getenv("DB_PORT")
-DB_NAME = os.getenv("DB_NAME")
-
-# Configurar la URL de conexión a la base de datos MySQL
-DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-engine = create_engine(DATABASE_URL)
-
+Session = sessionmaker(bind=engine)
+session = Session()
 
 class AnimeDAO:
     """
@@ -43,6 +33,7 @@ class AnimeDAO:
                 "producer": anime.producer,
                 "episodes_amount": anime.episodes_amount
             }
+            print("LLEGUE")
             conn.execute(series.insert().values(series_data))
     @classmethod
     def add_movies(cls, anime):

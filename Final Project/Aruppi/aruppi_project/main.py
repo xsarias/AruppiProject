@@ -148,8 +148,8 @@ async def create_news(news_base: NewsBase):
     Returns:
         dict: A message indicating successful creation of the news.
     """
-    news = News(title=news_base.title, info=news_base.info)
-    news_facade.add_news(news)
+    news_data = news_base.dict()
+    news_facade.add_news(news_data)
     return {"message": "News created successfully"}
 
 

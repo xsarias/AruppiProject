@@ -8,9 +8,8 @@ Authors:
 from sqlalchemy.sql import select
 from sqlalchemy.orm import sessionmaker
 from ..config import engine, movies, ovas, series
-
 Session = sessionmaker(bind=engine)
-session = Session()
+
 
 
 class AnimeDAO:
@@ -26,17 +25,23 @@ class AnimeDAO:
         Parameters:
         anime: The anime object to be added.
         """
-        with engine.connect() as conn:
-            series_data = {
-                "title": anime.title,
-                "description": anime.description,
-                "category": anime.category,
-                "anime_type": anime.anime_type,
-                "producer": anime.producer,
-                "episodes_amount": anime.episodes_amount,
-            }
-            print("LLEGUE")
-            conn.execute(series.insert().values(series_data))
+        series_data = {
+            "title": anime.title,
+            "description": anime.description,
+            "category": anime.category,
+            "anime_type": anime.anime_type,
+            "producer": anime.producer,
+            "episodes_amount": anime.episodes_amount,
+        }
+        session = Session()
+        try:
+            session.execute(series.insert().values(series_data))
+            session.commit()
+        except Exception as e:
+            session.rollback()
+            print(f"Error inserting series: {e}")
+        finally:
+            session.close()
 
     @classmethod
     def add_movies(cls, anime):
@@ -46,16 +51,23 @@ class AnimeDAO:
         Parameters:
         anime: The anime object to be added.
         """
-        with engine.connect() as conn:
-            movies_data = {
-                "title": anime.title,
-                "description": anime.description,
-                "category": anime.category,
-                "anime_type": anime.anime_type,
-                "producer": anime.producer,
-                "running_time": anime.running_time,
-            }
-            conn.execute(movies.insert().values(movies_data))
+        movies_data = {
+            "title": anime.title,
+            "description": anime.description,
+            "category": anime.category,
+            "anime_type": anime.anime_type,
+            "producer": anime.producer,
+            "running_time": anime.running_time,
+        }
+        session = Session()
+        try:
+            session.execute(movies.insert().values(movies_data))
+            session.commit()
+        except Exception as e:
+            session.rollback()
+            print(f"Error inserting series: {e}")
+        finally:
+            session.close()
 
     @classmethod
     def add_ovas(cls, anime):
@@ -65,16 +77,24 @@ class AnimeDAO:
         Parameters:
         anime: The anime object to be added.
         """
-        with engine.connect() as conn:
-            movies_data = {
-                "title": anime.title,
-                "description": anime.description,
-                "category": anime.category,
-                "anime_type": anime.anime_type,
-                "producer": anime.producer,
-                "running_time": anime.running_time,
-            }
-            conn.execute(ovas.insert().values(movies_data))
+        
+        ovas_data = {
+            "title": anime.title,
+            "description": anime.description,
+            "category": anime.category,
+            "anime_type": anime.anime_type,
+            "producer": anime.producer,
+            "running_time": anime.running_time,
+        }
+        session = Session()
+        try:
+            session.execute(ovas.insert().values(ovas_data))
+            session.commit()
+        except Exception as e:
+            session.rollback()
+            print(f"Error inserting series: {e}")
+        finally:
+            session.close()
 
     @classmethod
     def get_content(cls, title):
@@ -91,7 +111,11 @@ class AnimeDAO:
         with engine.connect() as conn:
             for table in [series, ovas, movies]:
                 query = select([table]).where(table.c.title.ilike(f"%{title}%"))
-                results.extend(conn.execute(query).fetchall())
+                result_set = conn.execute(query).fetchall()
+                # Convertir cada fila del resultado en un diccionario y agregarlo a los resultados
+                for row in result_set:
+                    anime_dict = dict(row)
+                    results.append(anime_dict)
         return results
 
     @classmethod

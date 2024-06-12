@@ -30,7 +30,6 @@ class Login(BaseModel):
 
 class SeriesBase(BaseModel):
     """Base model for anime series."""
-
     anime_id: str
     title: str
     description: str
@@ -111,7 +110,7 @@ def create_movies(movies_base: MoviesBase):
     Route to create a new series.
 
     Parameters:
-        series_base (MoviesBase): Data of the movies series.
+        movies_base (MoviesBase): Data of the movies.
 
     Returns:
         dict: A message indicating successful creation of the series.
@@ -133,8 +132,8 @@ def create_ovas(ovas_base: OvasBase):
     Returns:
         dict: A message indicating successful creation of the ovas.
     """
-    series_data = ovas_base.dict()
-    anime_facade.add_anime_ovas(series_data)
+    ovas_data = ovas_base.dict()
+    anime_facade.add_anime_ovas(ovas_data)
     return {"message": "Ovas created successfully"}
 
 
@@ -186,54 +185,6 @@ def search_by_category(search_params: Search):
     search_category = search_params.search
     titles_matching_category = anime_facade.search_anime_by_category(search_category)
     return {"matching_titles": titles_matching_category}
-
-
-@app.get("/user/anime/watch_series")
-def watch_series():
-    """
-    Route to search anime by type.
-
-    Parameters:
-        search_params (Search): Search parameters.
-
-    Returns:
-        dict: A list of anime titles matching the type.
-    """
-
-    titles_matching_type = anime_facade.search_anime_by_type("Series")
-    return {"avalaible series": titles_matching_type}
-
-
-@app.get("/user/anime/watch_movies")
-def watch_movies():
-    """
-    Route to search anime by type.
-
-    Parameters:
-        search_params (Search): Search parameters.
-
-    Returns:
-        dict: A list of anime titles matching the type.
-    """
-
-    titles_matching_type = anime_facade.search_anime_by_type("Movies")
-    return {"avalaible movies": titles_matching_type}
-
-
-@app.get("/user/anime/watch_ovas")
-def watch_ovas():
-    """
-    Route to search anime by type.
-
-    Parameters:
-        search_params (Search): Search parameters.
-
-    Returns:
-        dict: A list of anime titles matching the type.
-    """
-
-    titles_matching_type = anime_facade.search_anime_by_type("Ovas")
-    return {"matching_titles": titles_matching_type}
 
 
 @app.post("/user/news/show_news")

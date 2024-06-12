@@ -112,28 +112,3 @@ favorites = Table(
 )
 
 metadata.create_all(engine)
-
-
-<<<<<<< HEAD
-# Datos a insertar
-=======
-
-
->>>>>>> bb254de4d1ccd94d26533fbe89b17e7d15c20043
-anime_data = {
-    "title": "Example Series",
-    "description": "This is an example series.",
-    "category": "Action",
-    "anime_type": "Series",
-    "producer": "Example Producer",
-    "episodes_amount": 12,
-}
-
-
-insert_statement = insert(series).values(anime_data)
-
-try:
-    with engine.connect() as conn:
-        conn.execute(insert_statement)
-except Exception as e:
-    print("Ocurrió un error al insertar datos:", e)

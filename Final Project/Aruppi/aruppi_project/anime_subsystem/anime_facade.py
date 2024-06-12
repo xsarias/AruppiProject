@@ -67,7 +67,7 @@ class AnimeFacade:
         """
         This mmethod add an anime object to the movies data base
         """
-        strategy = AddOvasAnime()
+        strategy = AddMoviesAnime()
         strategy.add_content(
             Movies(
                 anime_data["anime_id"],

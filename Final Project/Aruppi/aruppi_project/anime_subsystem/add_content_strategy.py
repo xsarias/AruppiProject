@@ -4,7 +4,7 @@ This module implements strategies to get japanese culture content.
 
 from abc import ABC, abstractmethod
 from .anime_dao import AnimeDAO
-from .anime_types import Series, Anime, Ovas
+from .anime_types import Series, Movies, Ovas
 
 
 class AddContentStrategy(ABC):
@@ -22,7 +22,7 @@ class AddMoviesAnime(AddContentStrategy):
     Concrete strategy for adding movies.
     """
 
-    def add_content(self, content):
+    def add_content(self, content:Movies):
         AnimeDAO.add_movies(content)
 
 
@@ -31,7 +31,7 @@ class AddOvasAnime(AddContentStrategy):
     Concrete strategy for adding OVAs.
     """
 
-    def add_content(self, content):
+    def add_content(self, content: Ovas):
         AnimeDAO.add_ovas(content)
 
 
@@ -40,17 +40,5 @@ class AddSeriesAnime(AddContentStrategy):
     Concrete strategy for adding series.
     """
 
-    def add_content(self, content):
-        if isinstance(content, dict):
-            series = Series(
-                anime_id=content.get("anime_id"),
-                title=content.get("title"),
-                description=content.get("description"),
-                category=content.get("category"),
-                anime_type=content.get("anime_type"),
-                producer=content.get("producer"),
-                episodes_amount=content.get("episodes_amount"),
-            )
-            AnimeDAO.add_series(series)
-        else:
-            raise ValueError("Content must be a dictionary")
+    def add_content(self, content: Series):
+        AnimeDAO.add_series(content)

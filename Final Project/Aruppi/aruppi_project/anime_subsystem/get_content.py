@@ -14,7 +14,6 @@ class GetContent:
     """
 
     def __init__(self, strategy: GetContentStrategy):
- 
         self.strategy = strategy
 
     def set_strategy(self, strategy: GetContentStrategy):

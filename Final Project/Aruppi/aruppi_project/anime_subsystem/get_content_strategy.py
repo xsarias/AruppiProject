@@ -24,7 +24,7 @@ class GetAnimeByTitle(GetContentStrategy):
     """
 
     def get_content(self, search_parameter):
-        return AnimeDAO.get_content(search_parameter)
+        return AnimeDAO.get_anime_by_title(search_parameter)
 
 
 class GetAnimeByCategory(GetContentStrategy):

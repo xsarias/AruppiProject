@@ -167,7 +167,9 @@ def search_by_title(search_params: Search):
     Returns:
         dict: A list of anime titles matching the title.
     """
+    print(search_params)
     results = anime_facade.search_anime_by_title(search_params)
+    print(results)
     return results
 
 

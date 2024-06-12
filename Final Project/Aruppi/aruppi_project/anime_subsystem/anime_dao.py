@@ -97,7 +97,7 @@ class AnimeDAO:
             session.close()
 
     @classmethod
-    def get_content(cls, title):
+    def get_anime_by_title(cls, title):
         """
         Retrieves anime objects that match the given title.
 
@@ -107,15 +107,18 @@ class AnimeDAO:
         Returns:
         list: A list of anime objects matching the title.
         """
-        results = []
+        results = {
+            "series": [],
+            "ovas": [],
+            "movies": []
+        }
         with engine.connect() as conn:
-            for table in [series, ovas, movies]:
-                query = select([table]).where(table.c.title.ilike(f"%{title}%"))
+            for table_name, table in [("series", series), ("ovas", ovas), ("movies", movies)]:
+                query = select(table).where(table.c.title.ilike(f"%{title}%"))
                 result_set = conn.execute(query).fetchall()
-                # Convertir cada fila del resultado en un diccionario y agregarlo a los resultados
                 for row in result_set:
                     anime_dict = dict(row)
-                    results.append(anime_dict)
+                    results[table_name].append(anime_dict)
         return results
 
     @classmethod

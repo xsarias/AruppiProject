@@ -1,5 +1,6 @@
 from aruppi_project.user_profile_subsystem.collection_strategy import CollectionStrategy
 
+
 class Collection:
     """
     Represents a collection of items managed by a specific strategy.
@@ -7,6 +8,7 @@ class Collection:
     Args:
         strategy (CollectionStrategy): The strategy used to manage the collection.
     """
+
     def __init__(self, strategy: CollectionStrategy):
         """
         Initializes a Collection instance with a given strategy.

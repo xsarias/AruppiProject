@@ -27,6 +27,7 @@ class Login(BaseModel):
     username: str
     password: str
 
+
 class SeriesBase(BaseModel):
     """Base model for anime series."""
 
@@ -37,6 +38,7 @@ class SeriesBase(BaseModel):
     anime_type: str
     producer: str
     episodes_amount: int
+
 
 class MoviesBase(BaseModel):
     """Base model for anime movies."""
@@ -49,6 +51,7 @@ class MoviesBase(BaseModel):
     producer: str
     running_time: float
 
+
 class OvasBase(BaseModel):
     """Base model for anime movies."""
 
@@ -60,17 +63,22 @@ class OvasBase(BaseModel):
     producer: str
     running_time: float
 
+
 class Search(BaseModel):
     """Base model for searching anime."""
 
     search: str
 
+
 class NewsBase(BaseModel):
     """Base model for news ."""
-    title : str
+
+    title: str
     info: str
-    
+
+
 # -------------------------->>>> Routes and CRUD operations definitions
+
 
 @app.post("/login")
 def login(user_info: Login) -> bool:
@@ -79,7 +87,8 @@ def login(user_info: Login) -> bool:
     auth = Authentication(user["username"], user["password"])
     return auth.authenticate()
 
-#-------------------------Services for ADMIN -------------------------------
+
+# -------------------------Services for ADMIN -------------------------------
 @app.post("/admin/anime/add_series/")
 async def create_series(series_base: SeriesBase):
     """
@@ -95,6 +104,7 @@ async def create_series(series_base: SeriesBase):
     anime_facade.add_anime_series(series_data)
     return {"message": "Series created successfully"}
 
+
 @app.post("/admin/anime/add_movies/")
 def create_movies(movies_base: MoviesBase):
     """
@@ -107,9 +117,10 @@ def create_movies(movies_base: MoviesBase):
         dict: A message indicating successful creation of the series.
     """
     movies_data = movies_base.dict()
-    
+
     anime_facade.add_anime_movies(movies_data)
     return {"message": "Movies created successfully"}
+
 
 @app.post("/admin/anime/add_ovas/")
 def create_ovas(ovas_base: OvasBase):
@@ -125,6 +136,7 @@ def create_ovas(ovas_base: OvasBase):
     series_data = ovas_base.dict()
     anime_facade.add_anime_ovas(series_data)
     return {"message": "Ovas created successfully"}
+
 
 @app.post("/admin/news/add_news/")
 async def create_news(news_base: NewsBase):
@@ -142,7 +154,8 @@ async def create_news(news_base: NewsBase):
     return {"message": "News created successfully"}
 
 
-#----------------------- Services for USER ---------------------------------
+# ----------------------- Services for USER ---------------------------------
+
 
 @app.post("/user/anime/search_by_title")
 def search_by_title(search_params: Search):
@@ -155,8 +168,9 @@ def search_by_title(search_params: Search):
     Returns:
         dict: A list of anime titles matching the title.
     """
-    results=anime_facade.search_anime_by_title(search_params)
+    results = anime_facade.search_anime_by_title(search_params)
     return results
+
 
 @app.post("/user/anime/search_by_category")
 def search_by_category(search_params: Search):
@@ -251,7 +265,7 @@ async def delete_news(title: str):
     return {"message": "News deleted successfully"}
 
 
-#test
+# test
 stations = [
     Station(name="Olympica"),
     Station(name="Radio Uno"),
@@ -271,6 +285,7 @@ async def get_all_stations():
     stations = radio_facade.get_all_stations()
     return {"stations": [station.name for station in stations]}
 
+
 @app.post("/radio/play/")
 async def play(station_name: str):
     """
@@ -289,6 +304,7 @@ async def play(station_name: str):
     radio_facade.action()
     return {"message": f"Station {station_name} is now playing"}
 
+
 @app.post("/radio/pause/")
 async def pause(station_name: str):
     """
@@ -306,6 +322,3 @@ async def pause(station_name: str):
     radio_facade.set_state(Pause())
     radio_facade.action()
     return {"message": f"Station {station_name} is now paused"}
-
-
-

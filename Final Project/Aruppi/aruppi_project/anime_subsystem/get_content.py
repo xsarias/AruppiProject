@@ -1,7 +1,9 @@
 """
 This module implements strategies to get Japanese culture content.
 """
+
 from .get_content_strategy import GetContentStrategy
+
 
 class GetContent:
     """

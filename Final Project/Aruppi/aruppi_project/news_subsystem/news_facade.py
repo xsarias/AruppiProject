@@ -8,10 +8,12 @@ Authors:
 from typing import List
 from .news_dao import NewsDAO
 
+
 class NewsFacade:
     """This class is facade of news"""
+
     def __init__(self):
-        self.newsdao=NewsDAO()
+        self.newsdao = NewsDAO()
 
     def add_news(self, news):
         """This method adds news to the database"""
@@ -21,6 +23,6 @@ class NewsFacade:
         """This Class remove news by title"""
         return self.newsdao.remove_news_by_title(title)
 
-    def show_news(self)-> List[dict]:
+    def show_news(self) -> List[dict]:
         """This methos shows the news"""
         return self.newsdao.get_all_news()

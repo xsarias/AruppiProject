@@ -4,12 +4,14 @@ Authors:
 -> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
+
 from sqlalchemy.sql import select
 from sqlalchemy.orm import sessionmaker
 from ..config import engine, movies, ovas, series
 
 Session = sessionmaker(bind=engine)
 session = Session()
+
 
 class AnimeDAO:
     """
@@ -31,10 +33,11 @@ class AnimeDAO:
                 "category": anime.category,
                 "anime_type": anime.anime_type,
                 "producer": anime.producer,
-                "episodes_amount": anime.episodes_amount
+                "episodes_amount": anime.episodes_amount,
             }
             print("LLEGUE")
             conn.execute(series.insert().values(series_data))
+
     @classmethod
     def add_movies(cls, anime):
         """
@@ -50,9 +53,10 @@ class AnimeDAO:
                 "category": anime.category,
                 "anime_type": anime.anime_type,
                 "producer": anime.producer,
-                "running_time": anime.running_time
+                "running_time": anime.running_time,
             }
             conn.execute(movies.insert().values(movies_data))
+
     @classmethod
     def add_ovas(cls, anime):
         """
@@ -68,10 +72,10 @@ class AnimeDAO:
                 "category": anime.category,
                 "anime_type": anime.anime_type,
                 "producer": anime.producer,
-                "running_time": anime.running_time
+                "running_time": anime.running_time,
             }
             conn.execute(ovas.insert().values(movies_data))
-    
+
     @classmethod
     def get_content(cls, title):
         """

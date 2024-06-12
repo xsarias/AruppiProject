@@ -4,7 +4,9 @@ Authors:
 -> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
+
 from .radio_state import RadioState, Play
+
 
 class Station:
     """
@@ -25,6 +27,7 @@ class Station:
 
     def previous_station(self):
         """go to the previous station"""
+
 
 class Radio:
     """

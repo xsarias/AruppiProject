@@ -5,11 +5,13 @@ Authors:
 -> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
 """
 
+
 class News:
     """This class provides news information"""
-    def __init__(self, info,title):
-        self.title=title
-        self.information=info
+
+    def __init__(self, info, title):
+        self.title = title
+        self.information = info
 
     def read_news(self):
         """This method shows a list of news"""

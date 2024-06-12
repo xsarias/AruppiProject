@@ -1,8 +1,14 @@
-from aruppi_project.user_profile_subsystem.collection_strategy import FavoritesStrategy, RecommendedStrategy, QueueStrategy
+from aruppi_project.user_profile_subsystem.collection_strategy import (
+    FavoritesStrategy,
+    RecommendedStrategy,
+    QueueStrategy,
+)
 from aruppi_project.user_profile_subsystem.collection import Collection
+
 
 class User:
     """This class manages the user collections"""
+
     def __init__(self, username):
         self.username = username
         self.favorites = Collection(FavoritesStrategy())
@@ -27,6 +33,7 @@ class User:
     def show_queue(self):
         self.queue.show_collection()
 
+
 # Bloque de prueba
 if __name__ == "__main__":
     # Crear un usuario
@@ -40,10 +47,10 @@ if __name__ == "__main__":
 
     # Mostrar las colecciones
     print("Favorites:", end=" ")
-    user.show_favorites()       # Output: Favorites: ['Naruto', 'One Piece']
-    
+    user.show_favorites()  # Output: Favorites: ['Naruto', 'One Piece']
+
     print("Recommended:", end=" ")
-    user.show_recommended()     # Output: Recommended: ['Attack on Titan']
-    
+    user.show_recommended()  # Output: Recommended: ['Attack on Titan']
+
     print("Queue:", end=" ")
-    user.show_queue()           # Output: Queue: ['My Hero Academia']
+    user.show_queue()  # Output: Queue: ['My Hero Academia']

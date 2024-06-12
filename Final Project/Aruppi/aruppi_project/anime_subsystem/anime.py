@@ -38,42 +38,6 @@ class Anime(ABC):
         self.anime_type = anime_type
         self.producer = producer
 
-    def is_category(self, category):
-        """
-        Checks if the anime belongs to the specified category.
-
-        Parameters:
-        category (str): The category to check.
-
-        Returns:
-        bool: True if the anime belongs to the specified category, False otherwise.
-        """
-        return self.category.lower() == category.lower()
-
-    def is_type(self, anime_type):
-        """
-        Checks if the anime is of the specified type.
-
-        Parameters:
-        anime_type (str): The type to check.
-
-        Returns:
-        bool: True if the anime is of the specified type, False otherwise.
-        """
-        return self.anime_type.lower() == anime_type.lower()
-
-    def is_title(self, title):
-        """
-        Checks if the anime title matches the specified title.
-
-        Parameters:
-        title (str): The title to check.
-
-        Returns:
-        bool: True if the anime title matches the specified title, False otherwise.
-        """
-        return self.title.lower() == title.lower()
-
     @abstractmethod
     def get_details(self):
         """

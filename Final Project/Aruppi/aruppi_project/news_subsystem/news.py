@@ -11,7 +11,7 @@ class News:
 
     def __init__(self, info, title):
         self.title = title
-        self.information = info
+        self.info = info
 
     def read_news(self):
         """This method shows a list of news"""

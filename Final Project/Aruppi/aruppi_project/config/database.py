@@ -19,16 +19,11 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 
 
-<<<<<<< HEAD
-# # Cargar las variables de entorno desde el archivo .env
+# Charge the Environment Variables
 dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
-=======
-
-dotenv_path = os.path.join(os.path.dirname(__file__),'.env')
->>>>>>> bb254de4d1ccd94d26533fbe89b17e7d15c20043
 load_dotenv(dotenv_path)
 
-# Obtener las variables de entorno
+# get Environment Variables
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 DB_HOST = os.getenv("DB_HOST")
@@ -46,15 +41,9 @@ engine = create_engine(global_DATABASE_URL)
 
 metadata = MetaData()
 
-<<<<<<< HEAD
 # Define the tables
-series = Table(
-    "series",
-    metadata,
-=======
 
 series = Table("series", metadata,
->>>>>>> bb254de4d1ccd94d26533fbe89b17e7d15c20043
     Column("anime_id", Integer, primary_key=True, autoincrement=True),
     Column("title", String(50)),
     Column("description", String(100)),

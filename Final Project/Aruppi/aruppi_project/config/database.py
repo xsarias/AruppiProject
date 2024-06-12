@@ -1,3 +1,9 @@
+"""
+This module implements database connection and table creation.
+Authors:
+-> Xiomara Salome Arias Arias < xsariasa@udistrital.edu.co >
+-> Carlos Andres Celis Herrera < cacelish@udistrital.edu.co >
+"""
 import os
 from sqlalchemy import (
     create_engine,
@@ -13,8 +19,13 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 
 
+<<<<<<< HEAD
 # # Cargar las variables de entorno desde el archivo .env
 dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
+=======
+
+dotenv_path = os.path.join(os.path.dirname(__file__),'.env')
+>>>>>>> bb254de4d1ccd94d26533fbe89b17e7d15c20043
 load_dotenv(dotenv_path)
 
 # Obtener las variables de entorno
@@ -29,16 +40,21 @@ global_DATABASE_URL = (
     f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 )
 
-# # Crear el engine de SQLAlchemy
+
 engine = create_engine(global_DATABASE_URL)
 
-# Crear un objeto MetaData para definir las tablas
+
 metadata = MetaData()
 
+<<<<<<< HEAD
 # Define the tables
 series = Table(
     "series",
     metadata,
+=======
+
+series = Table("series", metadata,
+>>>>>>> bb254de4d1ccd94d26533fbe89b17e7d15c20043
     Column("anime_id", Integer, primary_key=True, autoincrement=True),
     Column("title", String(50)),
     Column("description", String(100)),
@@ -105,11 +121,16 @@ recommended = Table(
 favorites = Table(
     "favorites", metadata, Column("username", String(50)), Column("anime_id", Integer)
 )
-# Crear las tablas en la base de datos
+
 metadata.create_all(engine)
 
 
+<<<<<<< HEAD
 # Datos a insertar
+=======
+
+
+>>>>>>> bb254de4d1ccd94d26533fbe89b17e7d15c20043
 anime_data = {
     "title": "Example Series",
     "description": "This is an example series.",
@@ -119,7 +140,7 @@ anime_data = {
     "episodes_amount": 12,
 }
 
-# Crear una sentencia de inserción
+
 insert_statement = insert(series).values(anime_data)
 
 try:

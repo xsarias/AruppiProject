@@ -9,7 +9,7 @@ class AddContent:
     """
     This class represents a context for retrieving Japanese culture content.
 
-    Attributes:
+    Parameters:
         strategy (GetContentrategy): The strategy to be used for getting content.
     """
 

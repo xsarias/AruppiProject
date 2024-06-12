@@ -38,10 +38,49 @@ class Anime(ABC):
         self.anime_type = anime_type
         self.producer = producer
 
+<<<<<<< HEAD
+=======
+    def is_category(self, category):
+        """
+        This method checks if the anime belongs to the specified category.
+
+        Parameters:
+        category (str): The category to check.
+
+        Returns:
+        bool: True if the anime belongs to the specified category, False otherwise.
+        """
+        return self.category.lower() == category.lower()
+
+    def is_type(self, anime_type):
+        """
+        This method checks if the anime is of the specified type.
+
+        Parameters:
+        anime_type (str): The type to check.
+
+        Returns:
+        bool: True if the anime is of the specified type, False otherwise.
+        """
+        return self.anime_type.lower() == anime_type.lower()
+
+    def is_title(self, title):
+        """
+        This method checks if the anime title matches the specified title.
+
+        Parameters:
+        title (str): The title to check.
+
+        Returns:
+        bool: True if the anime title matches the specified title, False otherwise.
+        """
+        return self.title.lower() == title.lower()
+
+>>>>>>> bb254de4d1ccd94d26533fbe89b17e7d15c20043
     @abstractmethod
     def get_details(self):
         """
-        Abstract method to get the details of the anime. Must be implemented by subclasses.
+        This Abstract method to get the details of the anime. Must be implemented by subclasses.
 
         Returns:
         str: A string representation of the anime details.

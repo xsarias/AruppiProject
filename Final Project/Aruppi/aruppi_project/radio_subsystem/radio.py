@@ -33,14 +33,12 @@ class Radio:
     """
     This class is the context for the radio states.
     """
-
     def __init__(self):
-        """Initializes the Radio object with a default state of Play."""
         self.state = Play()
 
     def action(self, station):
         """
-        Performs an action based on the current state.
+        This method performs an action based on the current state.
 
         Args:
             station: The current station object.
@@ -49,7 +47,7 @@ class Radio:
 
     def set_state(self, state: RadioState):
         """
-        Sets the state of the radio.
+        This method sets the state of the radio.
 
         Args:
             state (RadioState): The state object to set.

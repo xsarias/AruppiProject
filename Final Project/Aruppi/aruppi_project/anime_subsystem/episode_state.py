@@ -38,22 +38,11 @@ class Episode:
     """This class represents an episode of an anime series"""
 
     def __init__(self, episode):
-        """Initializes an episode with a given number"""
+        """This method initializes an episode with a given number"""
         self.episode = episode
         # Initial episode state
         self.state = NotWatched()
 
     def watch(self):
-        """Transitions the episode to a watched state"""
+        """This method transitions the episode to a watched state"""
         self.state = self.state.watch(self.episode)
-
-
-# Example usage:
-# Creating an episode
-episode1 = Episode(1)
-
-# Watching the episode
-episode1.watch()
-
-# Trying to watch the same episode again
-episode1.watch()

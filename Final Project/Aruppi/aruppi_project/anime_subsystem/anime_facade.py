@@ -12,16 +12,6 @@ from .anime_types import Movies, Ovas, Series
 class AnimeFacade:
     """
     This class represents the Facade of Anime content.
-
-    Methods:
-        add_anime: Adds an anime to the database.
-        search_anime_by_title: Searches for anime by title.
-        search_anime_by_category: Searches for anime by category.
-        search_anime_by_type: Searches for anime by type.
-        watch_series: Retrieves and displays all series anime.
-        watch_movies: Retrieves and displays all movies anime.
-        watch_ovas: Retrieves and displays all OVAs anime.
-        get_anime_info: Displays information of a specific anime.
     """
 
     def __init__(self):
@@ -30,7 +20,7 @@ class AnimeFacade:
 
     def add_anime_series(self, anime_data):
         """
-        Adds an anime object to the anime list.
+        This method adds an anime object to the anime list.
 
         Parameters:
         anime (Anime): The anime object to be added.
@@ -49,7 +39,7 @@ class AnimeFacade:
 
     def add_anime_ovas(self, anime_data):
         """
-        Adds an anime object to the ovas data base.
+        This method adds an anime object to the ovas data base.
         """
         strategy=AddOvasAnime()
         strategy.add_content(Ovas(
@@ -65,7 +55,7 @@ class AnimeFacade:
     
     def add_anime_movies(self, anime_data):
         """
-        Add an anime object to the movies data base
+        This mmethod add an anime object to the movies data base
         """
         strategy=AddOvasAnime()
         strategy.add_content(Movies(
@@ -81,7 +71,7 @@ class AnimeFacade:
         
     def search_anime_by_title(self, title):
         """
-        Searches for anime by title.
+        This method searches for anime by title.
 
         Parameters:
         title (str): The title to search for.
@@ -94,7 +84,7 @@ class AnimeFacade:
 
     def search_anime_by_category(self, category):
         """
-        Searches for anime by category.
+        This method searches for anime by category.
 
         Parameters:
         category (str): The category to search for.
@@ -107,7 +97,7 @@ class AnimeFacade:
 
     def search_anime_by_type(self, anime_type):
         """
-        Searches for anime by type.
+        This method earches for anime by type.
 
         Parameters:
         anime_type (str): The type to search for.

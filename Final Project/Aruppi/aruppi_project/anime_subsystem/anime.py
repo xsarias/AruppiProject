@@ -40,7 +40,7 @@ class Anime(ABC):
 
     def is_category(self, category):
         """
-        Checks if the anime belongs to the specified category.
+        This method checks if the anime belongs to the specified category.
 
         Parameters:
         category (str): The category to check.
@@ -52,7 +52,7 @@ class Anime(ABC):
 
     def is_type(self, anime_type):
         """
-        Checks if the anime is of the specified type.
+        This method checks if the anime is of the specified type.
 
         Parameters:
         anime_type (str): The type to check.
@@ -64,7 +64,7 @@ class Anime(ABC):
 
     def is_title(self, title):
         """
-        Checks if the anime title matches the specified title.
+        This method checks if the anime title matches the specified title.
 
         Parameters:
         title (str): The title to check.
@@ -77,7 +77,7 @@ class Anime(ABC):
     @abstractmethod
     def get_details(self):
         """
-        Abstract method to get the details of the anime. Must be implemented by subclasses.
+        This Abstract method to get the details of the anime. Must be implemented by subclasses.
 
         Returns:
         str: A string representation of the anime details.

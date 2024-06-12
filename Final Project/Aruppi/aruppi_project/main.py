@@ -20,7 +20,7 @@ anime_facade = AnimeFacade()
 news_facade = NewsFacade()
 
 
-# Pydantic model definitions
+
 class Login(BaseModel):
     """Base Model for Login"""
 

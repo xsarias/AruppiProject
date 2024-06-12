@@ -15,18 +15,12 @@ class RadioFacade:
     """
 
     def __init__(self, stations: List[Station]):
-        """
-        Initialize the RadioFacade object.
-
-        Args:
-            stations (List[Station]): A list of radio stations.
-        """
         self.radio = Radio()
         self.radio_dao = RadioDAO(stations)
 
     def action(self):
         """
-        Perform an action on the current radio station.
+        This method perform an action on the current radio station.
 
         Raises:
             ValueError: If no current station is set.
@@ -39,7 +33,7 @@ class RadioFacade:
 
     def set_state(self, state):
         """
-        Set the state of the radio.
+        This method set the state of the radio.
 
         Args:
             state: The state to set for the radio.
@@ -48,7 +42,7 @@ class RadioFacade:
 
     def get_all_stations(self) -> List[Station]:
         """
-        Get all available radio stations.
+        This method get all available radio stations.
 
         Returns:
             List[Station]: A list of all available radio stations.
@@ -57,7 +51,7 @@ class RadioFacade:
 
     def set_current_station(self, station_name: str) -> bool:
         """
-        Set the current radio station.
+        This method set the current radio station.
 
         Args:
             station_name (str): The name of the station to set as current.
